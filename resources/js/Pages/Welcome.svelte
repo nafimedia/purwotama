@@ -384,11 +384,11 @@
         <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
             <!-- Brand Logo -->
             <Link href="/" class="group flex items-center gap-3">
-                <div class="h-11 w-11 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-0.5 shadow-lg shadow-indigo-500/30 transition-transform duration-300 group-hover:scale-105">
-                    <div class="flex h-full w-full items-center justify-center rounded-[10px] bg-white dark:bg-slate-950">
-                        <ShieldCheck class="h-6 w-6 text-indigo-600 dark:text-indigo-400 transition-transform duration-300 group-hover:rotate-12" />
-                    </div>
-                </div>
+                <img
+                    src="/images/branding/purwotama_logo.png"
+                    alt="Purwotama Satria Logo"
+                    class="h-11 w-11 object-contain transition-transform duration-300 group-hover:scale-105"
+                />
                 <div class="flex flex-col">
                     <span class="bg-gradient-to-r from-slate-900 via-indigo-950 to-indigo-700 dark:from-white dark:via-slate-100 dark:to-indigo-200 bg-clip-text text-xl font-black tracking-tight text-transparent">
                         Purwotama Satria
@@ -959,8 +959,12 @@
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div class="md:col-span-2">
-                    <div class="flex items-center gap-2">
-                        <ShieldCheck class="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+                    <div class="flex items-center gap-3">
+                        <img
+                            src="/images/branding/purwotama_logo.png"
+                            alt="Purwotama Satria Logo"
+                            class="h-8 w-8 object-contain"
+                        />
                         <span class="text-lg font-bold text-slate-900 dark:text-white">Purwotama Satria</span>
                     </div>
                     <p class="mt-3 text-slate-600 dark:text-slate-400 text-xs max-w-md leading-relaxed font-medium">

@@ -69,7 +69,7 @@ class SiteSettingSeeder extends Seeder
             // Public Website Branding
             [
                 'key' => 'public_logo_light',
-                'value' => '/images/branding/public_logo_light.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Logo Public (Light Mode)',
@@ -77,7 +77,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'public_logo_dark',
-                'value' => '/images/branding/public_logo_dark.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Logo Public (Dark Mode)',
@@ -85,7 +85,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'public_logo_mobile',
-                'value' => '/images/branding/public_logo_light.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Logo Public Mobile',
@@ -93,7 +93,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'public_logo_footer',
-                'value' => '/images/branding/public_logo_dark.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Logo Public Footer',
@@ -101,7 +101,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'public_favicon',
-                'value' => '/images/branding/public_favicon.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Favicon Website',
@@ -109,7 +109,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'public_apple_touch_icon',
-                'value' => '/images/branding/public_apple_touch_icon.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Apple Touch Icon',
@@ -118,7 +118,7 @@ class SiteSettingSeeder extends Seeder
             // Admin Dashboard Branding
             [
                 'key' => 'admin_logo_light',
-                'value' => '/images/branding/admin_logo_light.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Logo Admin (Light Mode)',
@@ -126,7 +126,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'admin_logo_dark',
-                'value' => '/images/branding/admin_logo_dark.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Logo Admin (Dark Mode)',
@@ -134,7 +134,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'admin_logo_collapsed',
-                'value' => '/images/branding/admin_logo_collapsed.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Logo Admin Collapsed (Icon Only)',
@@ -142,7 +142,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'admin_favicon',
-                'value' => '/images/branding/public_favicon.svg',
+                'value' => '/images/branding/purwotama_logo.png',
                 'group' => 'branding',
                 'type' => 'string',
                 'label' => 'Favicon Admin Panel',
