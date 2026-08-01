@@ -64,6 +64,13 @@ class HandleInertiaRequests extends Middleware
                 ? \App\Http\Controllers\Admin\BrandingController::getCachedBranding()
                 : [],
             'modules' => \App\Models\Module::getCachedActiveModules(),
+            'app_env' => [
+                'mode' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))),
+                'is_production' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))) === 'production',
+                'is_demo' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))) === 'demo',
+                'is_development' => in_array(strtolower(env('APP_MODE', env('APP_ENV', 'local'))), ['local', 'development', 'dev']),
+                'show_demo_credentials' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))) !== 'production',
+            ],
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),

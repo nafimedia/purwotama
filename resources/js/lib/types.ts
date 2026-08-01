@@ -98,6 +98,14 @@ export interface FlashMessages {
     info?: string;
 }
 
+export interface AppEnvProps {
+    mode: 'development' | 'demo' | 'production' | string;
+    is_production: boolean;
+    is_demo: boolean;
+    is_development: boolean;
+    show_demo_credentials: boolean;
+}
+
 export interface PageProps {
     auth: {
         user: User | null;
@@ -105,6 +113,7 @@ export interface PageProps {
     site: SiteSettings;
     branding: BrandingSettings;
     modules: Record<string, boolean>;
+    app_env: AppEnvProps;
     flash: FlashMessages;
     errors: Record<string, string>;
 }
