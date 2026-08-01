@@ -12,7 +12,7 @@ class SiteSettingSeeder extends Seeder
         $settings = [
             [
                 'key' => 'site_name',
-                'value' => 'LaraSvelte Starterkit',
+                'value' => 'Purwotama Satria',
                 'group' => 'general',
                 'type' => 'string',
                 'label' => 'Nama Aplikasi',
@@ -20,7 +20,7 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'site_description',
-                'value' => 'Starter kit modern Laravel 13 + Svelte 5 + Tailwind CSS v4 dengan fitur RBAC, Activity Log & API Ready.',
+                'value' => 'Studio Pengembangan Software, Sistem Informasi Enterprise, LMS, CBT, POS Kasir & Aplikasi Mobile Kustom Professional.',
                 'group' => 'general',
                 'type' => 'text',
                 'label' => 'Deskripsi Aplikasi',
@@ -28,11 +28,27 @@ class SiteSettingSeeder extends Seeder
             ],
             [
                 'key' => 'contact_email',
-                'value' => 'support@example.com',
+                'value' => 'contact@purwotamasatria.com',
                 'group' => 'contact',
                 'type' => 'string',
                 'label' => 'Email Kontak',
                 'description' => 'Alamat email resmi dukungan pengguna.',
+            ],
+            [
+                'key' => 'contact_fairuz_phone',
+                'value' => '+6282243317522',
+                'group' => 'contact',
+                'type' => 'string',
+                'label' => 'No WhatsApp Fairuz (Chief Developer)',
+                'description' => 'Nomor WhatsApp kontak langsung Fairuz - Chief Developer.',
+            ],
+            [
+                'key' => 'contact_afif_phone',
+                'value' => '+6282134397280',
+                'group' => 'contact',
+                'type' => 'string',
+                'label' => 'No WhatsApp Afif (Owner)',
+                'description' => 'Nomor WhatsApp kontak langsung Afif - Owner Purwotama Satria.',
             ],
             [
                 'key' => 'enable_registration',

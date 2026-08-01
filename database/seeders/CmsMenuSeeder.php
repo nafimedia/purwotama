@@ -19,12 +19,12 @@ class CmsMenuSeeder extends Seeder
         MenuItem::where('menu_id', $navbar->id)->delete();
 
         $navItems = [
-            ['title' => 'Home', 'url' => '/', 'type' => 'custom', 'order' => 1],
-            ['title' => 'Fitur Unggulan', 'url' => '#features', 'type' => 'custom', 'order' => 2],
-            ['title' => 'Tech Stack', 'url' => '#tech-stack', 'type' => 'custom', 'order' => 3],
-            ['title' => 'Quick Start', 'url' => '#quickstart', 'type' => 'custom', 'order' => 4],
-            ['title' => 'Statistik', 'url' => '#stats', 'type' => 'custom', 'order' => 5],
-            ['title' => 'Blog & Artikel', 'url' => '/blog', 'type' => 'custom', 'order' => 6],
+            ['title' => 'Beranda', 'url' => '/', 'type' => 'custom', 'order' => 1],
+            ['title' => 'Layanan', 'url' => '#services', 'type' => 'custom', 'order' => 2],
+            ['title' => 'Portofolio', 'url' => '#portfolio', 'type' => 'custom', 'order' => 3],
+            ['title' => 'Alur Kerja', 'url' => '#process', 'type' => 'custom', 'order' => 4],
+            ['title' => 'Tim Kontak', 'url' => '#contact', 'type' => 'custom', 'order' => 5],
+            ['title' => 'Blog & Insight', 'url' => '/blog', 'type' => 'custom', 'order' => 6],
         ];
 
         foreach ($navItems as $item) {
