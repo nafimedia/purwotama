@@ -583,37 +583,89 @@
                 </p>
             </div>
 
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- 1. Pengembangan Cepat & Terukur -->
                 <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 p-8 hover:border-emerald-500/50 transition-all duration-300 hover:-translate-y-1 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group">
-                    <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 to-teal-500 absolute top-0 left-0"></div>
-                    <div class="h-14 w-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-6">
-                        <Lock class="h-7 w-7" />
+                    <div class="h-1.5 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 absolute top-0 left-0"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="h-14 w-14 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                            <Rocket class="h-7 w-7" />
+                        </div>
+                        <span class="rounded-full bg-emerald-500/10 border border-emerald-500/30 px-3 py-1 text-xs font-black text-emerald-600 dark:text-emerald-300">
+                            ⭐ Poin #1
+                        </span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Source Code 100% Hak Milik</h3>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white">Pengembangan Cepat & Terukur</h3>
                     <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                        Seluruh kode sumber, basis data, dan dokumentasi arsitektur menjadi aset milik Anda sepenuhnya tanpa sistem sewa lisensi yang mengikat.
+                        Kami menerapkan proses pengembangan yang terstruktur, mulai dari analisis kebutuhan, perancangan, hingga implementasi. Hasilnya, proyek selesai tepat waktu dengan kualitas yang tetap terjaga.
                     </p>
                 </div>
 
+                <!-- 2. UI/UX Modern & Responsif -->
                 <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 p-8 hover:border-indigo-500/50 transition-all duration-300 hover:-translate-y-1 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group">
-                    <div class="h-1.5 w-full bg-gradient-to-r from-indigo-500 to-purple-500 absolute top-0 left-0"></div>
-                    <div class="h-14 w-14 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400 mb-6">
-                        <Zap class="h-7 w-7" />
+                    <div class="h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 absolute top-0 left-0"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="h-14 w-14 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 flex items-center justify-center text-indigo-600 dark:text-indigo-400">
+                            <Laptop class="h-7 w-7" />
+                        </div>
+                        <span class="rounded-full bg-indigo-500/10 border border-indigo-500/30 px-3 py-1 text-xs font-black text-indigo-600 dark:text-indigo-300">
+                            Poin #2
+                        </span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Teknologi Terdepan Svelte 5 + Laravel</h3>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white">UI/UX Modern & Responsif</h3>
                     <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                        Kecepatan render frontend Svelte 5 Runes dipadukan dengan keamanan backend Laravel 13 menghadirkan pengalaman pengguna super responsif.
+                        Setiap aplikasi dirancang dengan antarmuka yang intuitif, mudah digunakan, dan responsif di berbagai perangkat untuk memberikan pengalaman terbaik bagi pengguna.
                     </p>
                 </div>
 
-                <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 p-8 hover:border-purple-500/50 transition-all duration-300 hover:-translate-y-1 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group">
-                    <div class="h-1.5 w-full bg-gradient-to-r from-purple-500 to-pink-500 absolute top-0 left-0"></div>
-                    <div class="h-14 w-14 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6">
-                        <HeartHandshake class="h-7 w-7" />
+                <!-- 3. Keamanan & Skalabilitas -->
+                <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 p-8 hover:border-amber-500/50 transition-all duration-300 hover:-translate-y-1 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group">
+                    <div class="h-1.5 w-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500 absolute top-0 left-0"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="h-14 w-14 rounded-2xl bg-amber-500/15 border border-amber-500/30 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                            <ShieldCheck class="h-7 w-7" />
+                        </div>
+                        <span class="rounded-full bg-amber-500/10 border border-amber-500/30 px-3 py-1 text-xs font-black text-amber-600 dark:text-amber-300">
+                            Poin #3
+                        </span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900 dark:text-white">Komunikasi Direct dengan Founder</h3>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white">Keamanan & Skalabilitas</h3>
                     <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
-                        Anda berdiskusi dan berkonsultasi langsung bersama Fairuz (Chief Developer) dan Afif (Owner). Respon cepat tanpa birokrasi perantara.
+                        Aplikasi dibangun dengan standar keamanan yang baik dan arsitektur yang fleksibel, sehingga siap berkembang mengikuti kebutuhan bisnis Anda di masa depan.
+                    </p>
+                </div>
+
+                <!-- 4. Maintenance & Dukungan Berkelanjutan -->
+                <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 p-8 hover:border-rose-500/50 transition-all duration-300 hover:-translate-y-1 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group">
+                    <div class="h-1.5 w-full bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500 absolute top-0 left-0"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="h-14 w-14 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-600 dark:text-rose-400">
+                            <Clock3 class="h-7 w-7" />
+                        </div>
+                        <span class="rounded-full bg-rose-500/10 border border-rose-500/30 px-3 py-1 text-xs font-black text-rose-600 dark:text-rose-300">
+                            Poin #4
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white">Maintenance & Dukungan Berkelanjutan</h3>
+                    <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                        Kami menyediakan layanan pemeliharaan, perbaikan, dan pengembangan lanjutan agar sistem tetap stabil, aman, dan selalu relevan dengan kebutuhan bisnis Anda.
+                    </p>
+                </div>
+
+                <!-- 5. Arsitektur Siap Berkembang -->
+                <div class="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/70 p-8 hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden relative group md:col-span-2 lg:col-span-1">
+                    <div class="h-1.5 w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 absolute top-0 left-0"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="h-14 w-14 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 flex items-center justify-center text-cyan-600 dark:text-cyan-400">
+                            <TrendingUp class="h-7 w-7" />
+                        </div>
+                        <span class="rounded-full bg-cyan-500/10 border border-cyan-500/30 px-3 py-1 text-xs font-black text-cyan-600 dark:text-cyan-300">
+                            Poin #5
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-black text-slate-900 dark:text-white">Arsitektur Siap Berkembang</h3>
+                    <p class="mt-3 text-sm text-slate-600 dark:text-slate-300 leading-relaxed font-medium">
+                        Kami merancang sistem dengan arsitektur modular yang mudah dipelihara, dikembangkan, dan diintegrasikan dengan kebutuhan baru seiring pertumbuhan bisnis Anda.
                     </p>
                 </div>
             </div>
