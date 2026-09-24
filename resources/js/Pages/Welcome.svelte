@@ -638,12 +638,12 @@
 
             <!-- Headline -->
             <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
-                Sistem Operasional Bisnis yang Rapi, Cepat, dan <span class="text-[#714B67] dark:text-[#E2C3DB]">Milik Anda Seutuhnya</span>
+                Level Up <span class="text-[#714B67] dark:text-[#E2C3DB]">Your Quality of Work</span>
             </h1>
 
             <!-- Subtitle -->
             <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300">
-                Solusi software terintegrasi untuk kasir, stok gudang, akuntansi, dan alur kerja operasional bisnis Anda.
+                Sistem operasional terpadu untuk merapikan transaksi kasir, stok gudang, akuntansi, hingga alur kerja tim Anda.
             </p>
 
             <!-- Hero Action Buttons -->
