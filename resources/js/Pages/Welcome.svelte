@@ -524,13 +524,6 @@
                     >
                         <span>Dashboard</span>
                     </Link>
-                {:else}
-                    <Link
-                        href="/login"
-                        class="hidden rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-white sm:inline-flex dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
-                    >
-                        Login Admin
-                    </Link>
                 {/if}
 
                 <!-- Mobile Hamburger Toggle -->
@@ -592,12 +585,14 @@
                             <MessageSquare class="h-4 w-4" />
                             <span>Konsultasi WhatsApp (Fairuz)</span>
                         </a>
-                        <Link
-                            href="/login"
-                            class="flex items-center justify-center rounded-lg border border-slate-300 py-2 text-xs font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300"
-                        >
-                            Login Admin
-                        </Link>
+                        {#if authUser}
+                            <Link
+                                href="/admin/dashboard"
+                                class="flex items-center justify-center rounded-lg bg-[#714B67] py-2 text-xs font-semibold text-white"
+                            >
+                                Dashboard
+                            </Link>
+                        {/if}
                     </div>
                 </nav>
             </div>
@@ -1027,7 +1022,6 @@
                     <a href="#keunggulan" class="hover:text-[#714B67] dark:hover:text-white">Keunggulan</a>
                     <a href="#faq" class="hover:text-[#714B67] dark:hover:text-white">FAQ</a>
                     <a href="#kontak" class="hover:text-[#714B67] dark:hover:text-white">Kontak</a>
-                    <Link href="/login" class="hover:text-[#714B67] dark:hover:text-white">Login Admin</Link>
                 </div>
             </div>
 

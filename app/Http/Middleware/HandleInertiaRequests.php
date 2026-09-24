@@ -42,6 +42,16 @@ class HandleInertiaRequests extends Middleware
             ? SiteSetting::all()->pluck('value', 'key')->all()
             : [];
 
+        $env = strtolower((string) config('app.env', 'production'));
+        $mode = strtolower((string) config('app.mode', $env));
+        $isProduction = app()->isProduction() || $mode === 'production' || $env === 'production';
+        $isDemo = !$isProduction && ($mode === 'demo');
+        $isDevelopment = !$isProduction && in_array($mode, ['local', 'development', 'dev']);
+        $configuredShowDemo = config('app.show_demo_credentials');
+        $showDemoCredentials = $isProduction
+            ? false
+            : ($configuredShowDemo !== null ? filter_var($configuredShowDemo, FILTER_VALIDATE_BOOLEAN) : true);
+
         return array_merge(parent::share($request), [
             'auth' => [
                 'user' => $user ? [
@@ -65,11 +75,11 @@ class HandleInertiaRequests extends Middleware
                 : [],
             'modules' => \App\Models\Module::getCachedActiveModules(),
             'app_env' => [
-                'mode' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))),
-                'is_production' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))) === 'production',
-                'is_demo' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))) === 'demo',
-                'is_development' => in_array(strtolower(env('APP_MODE', env('APP_ENV', 'local'))), ['local', 'development', 'dev']),
-                'show_demo_credentials' => strtolower(env('APP_MODE', env('APP_ENV', 'local'))) !== 'production',
+                'mode' => $isProduction ? 'production' : $mode,
+                'is_production' => $isProduction,
+                'is_demo' => $isDemo,
+                'is_development' => $isDevelopment,
+                'show_demo_credentials' => $showDemoCredentials,
             ],
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),

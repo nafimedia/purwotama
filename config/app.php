@@ -28,6 +28,10 @@ return [
 
     'env' => env('APP_ENV', 'production'),
 
+    'mode' => env('APP_MODE', env('APP_ENV', 'production')),
+
+    'show_demo_credentials' => env('SHOW_DEMO_CREDENTIALS', null),
+
     /*
     |--------------------------------------------------------------------------
     | Application Debug Mode
