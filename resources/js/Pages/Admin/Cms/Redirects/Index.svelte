@@ -39,19 +39,19 @@
     }
 </script>
 
-<AppLayout title="Redirect Manager (301/302)">
+<AppLayout title="Pengalihan Tautan">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
             <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <ArrowRightLeft class="w-5 h-5 text-indigo-500" />
-                <span>Redirect Manager 301 & 302</span>
+                <span>Pengalihan Alamat Tautan</span>
             </h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Kelola pengalihan URL lama ke URL baru untuk menjaga reputasi SEO</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Arahkan alamat link lama ke link baru agar pengunjung tidak menemukan halaman error</p>
         </div>
 
         <Button variant="primary" size="md" onclick={() => isCreateOpen = true}>
             <Plus class="w-4 h-4 mr-1.5" />
-            <span>Tambah Redirect</span>
+            <span>Tambah Pengalihan</span>
         </Button>
     </div>
 

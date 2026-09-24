@@ -6,7 +6,7 @@
     import Button from '@/Components/UI/Button.svelte';
     import RichTextEditor from '@/Components/UI/RichTextEditor.svelte';
     import FileUpload from '@/Components/UI/FileUpload.svelte';
-    import { Save, ArrowLeft, Globe, Lock, Shield, FileText, Sparkles, CheckCircle2 } from 'lucide-svelte';
+    import { Save, ArrowLeft, Globe, Lock, Shield, FileText, CheckCircle2 } from 'lucide-svelte';
 
     interface Props {
         pageItem?: any;

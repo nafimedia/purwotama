@@ -22,7 +22,6 @@
         Code,
         ArrowLeft,
         Settings,
-        Sparkles,
         Eye,
         Check,
         Star,
@@ -139,7 +138,7 @@
     function saveStudio() {
         studioForm.put(`/admin/cms/forms/${form.id}`, {
             preserveScroll: true,
-            onSuccess: () => toast.success('Formulir Studio berhasil disimpan!'),
+            onSuccess: () => toast.success('Formulir berhasil disimpan!'),
         });
     }
 
@@ -162,11 +161,11 @@
         const url = `${window.location.origin}/f/${studioForm.slug}`;
         const iframe = `<iframe src="${url}" width="100%" height="700" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>`;
         navigator.clipboard.writeText(iframe);
-        toast.success('Kode iframe embed berhasil disalin!');
+        toast.success('Kode sematan formulir berhasil disalin!');
     }
 </script>
 
-<AppLayout title="Google Forms Builder Studio">
+<AppLayout title="Editor Formulir">
     <!-- Top Action Bar -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
         <div class="flex items-center gap-3">

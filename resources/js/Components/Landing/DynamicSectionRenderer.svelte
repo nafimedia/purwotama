@@ -12,7 +12,6 @@
         Terminal,
         Copy,
         Check,
-        Sparkle,
         ChevronRight,
         HelpCircle,
         CheckCircle,
@@ -66,7 +65,7 @@
                     <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
                         {#if section.content?.badge}
                             <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-medium backdrop-blur-md shadow-inner">
-                                <Sparkle class="w-3.5 h-3.5 text-amber-400 animate-spin" style="animation-duration: 4s;" />
+                                <Zap class="w-3.5 h-3.5 text-amber-400" />
                                 <span>{section.content.badge}</span>
                                 <ChevronRight class="w-3.5 h-3.5 text-indigo-400" />
                             </div>

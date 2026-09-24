@@ -17,7 +17,7 @@
         Folder,
         MessageSquare,
         Calendar,
-        Sparkles,
+        LayoutTemplate,
         Menu as MenuIcon,
         FileSpreadsheet,
         Image as ImageIcon,
@@ -48,7 +48,7 @@
         Folder,
         MessageSquare,
         Calendar,
-        Sparkles,
+        LayoutTemplate,
         Menu: MenuIcon,
         FileSpreadsheet,
         Image: ImageIcon,
@@ -62,11 +62,11 @@
     };
 
     const groupLabels: Record<string, string> = {
-        content: 'Content Management',
-        builder: 'Website Builder',
-        seo: 'SEO & Analytics',
-        media: 'Media',
-        system: 'System Core',
+        content: 'Kelola Konten',
+        builder: 'Desain Website',
+        seo: 'Optimasi & Statistik',
+        media: 'Galeri Berkas',
+        system: 'Sistem Inti',
     };
 
     const filteredModules = $derived(
@@ -83,7 +83,7 @@
 
     function toggleModule(mod: ModuleItem) {
         if (mod.is_system) {
-            toast.error('Modul utama (System Core) tidak dapat dinonaktifkan.');
+            toast.error('Modul sistem utama tidak dapat dinonaktifkan.');
             return;
         }
 

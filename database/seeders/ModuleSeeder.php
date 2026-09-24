@@ -66,10 +66,10 @@ class ModuleSeeder extends Seeder
             // Website Builder
             [
                 'key' => 'landing_builder',
-                'name' => 'Visual Landing Builder Studio',
+                'name' => 'Editor Halaman Utama',
                 'group' => 'builder',
                 'description' => 'Editor visual tata letak halaman depan tanpa koding.',
-                'icon' => 'Sparkles',
+                'icon' => 'LayoutTemplate',
                 'is_active' => true,
                 'is_system' => false,
                 'order' => 6,
@@ -86,9 +86,9 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'key' => 'forms',
-                'name' => 'Dynamic Form Builder',
+                'name' => 'Pembuat Formulir Online',
                 'group' => 'builder',
-                'description' => 'Pembuat formulir kontak/survei dinamis & inbox pesan.',
+                'description' => 'Pembuat formulir kontak, survei, dan kotak pesan pengunjung.',
                 'icon' => 'FileSpreadsheet',
                 'is_active' => true,
                 'is_system' => false,
@@ -98,7 +98,7 @@ class ModuleSeeder extends Seeder
             // Media
             [
                 'key' => 'media',
-                'name' => 'Media Library (Asset Manager)',
+                'name' => 'Galeri Berkas & Gambar',
                 'group' => 'media',
                 'description' => 'Penyimpanan terpusat gambar, dokumen, dan aset media.',
                 'icon' => 'Image',
@@ -110,9 +110,9 @@ class ModuleSeeder extends Seeder
             // SEO & Optimization
             [
                 'key' => 'redirects',
-                'name' => 'Redirect Manager (301/302)',
+                'name' => 'Pengalihan Tautan',
                 'group' => 'seo',
-                'description' => 'Pengalihan alamat URL untuk menjaga reputasi SEO.',
+                'description' => 'Pengalihan alamat tautan lama agar tidak terjadi halaman error.',
                 'icon' => 'ArrowRightLeft',
                 'is_active' => true,
                 'is_system' => false,
@@ -120,9 +120,9 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'key' => 'analytics',
-                'name' => 'CMS Analitik',
+                'name' => 'Statistik Pengunjung',
                 'group' => 'seo',
-                'description' => 'Laporan grafik pengunjung dan statistik lalu lintas web.',
+                'description' => 'Laporan grafik pengunjung dan statistik pembaca website.',
                 'icon' => 'BarChart3',
                 'is_active' => true,
                 'is_system' => false,
@@ -132,7 +132,7 @@ class ModuleSeeder extends Seeder
             // System Management (Core)
             [
                 'key' => 'activity_logs',
-                'name' => 'Log Aktivitas Sistem',
+                'name' => 'Riwayat Aktivitas Sistem',
                 'group' => 'system',
                 'description' => 'Catatan riwayat tindakan administrator & pengguna.',
                 'icon' => 'Activity',
@@ -152,9 +152,9 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'key' => 'roles',
-                'name' => 'Role & Izin (RBAC)',
+                'name' => 'Peran & Hak Akses',
                 'group' => 'system',
-                'description' => 'Matriks hak akses dan peran pengguna.',
+                'description' => 'Pengaturan batasan akses dan wewenang pengguna.',
                 'icon' => 'ShieldCheck',
                 'is_active' => true,
                 'is_system' => true, // Core system
@@ -162,7 +162,7 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'key' => 'settings',
-                'name' => 'Pengaturan Situs & Branding',
+                'name' => 'Pengaturan Situs',
                 'group' => 'system',
                 'description' => 'Pengaturan identitas global dan logo situs.',
                 'icon' => 'Settings',
@@ -172,9 +172,9 @@ class ModuleSeeder extends Seeder
             ],
             [
                 'key' => 'modules',
-                'name' => 'Manajemen Modul System',
+                'name' => 'Manajemen Modul & Fitur',
                 'group' => 'system',
-                'description' => 'Pengaturan sakelar aktif/nonaktif fitur aplikasi.',
+                'description' => 'Pengaturan aktif atau nonaktif fitur aplikasi.',
                 'icon' => 'Layers',
                 'is_active' => true,
                 'is_system' => true, // Core system

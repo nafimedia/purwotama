@@ -40,11 +40,11 @@
     ]);
 </script>
 
-<AppLayout title="Audit Log Aktivitas System">
+<AppLayout title="Riwayat Aktivitas Sistem">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">Audit Log Aktivitas</h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Riwayat jejak audit tindakan pengguna dan aktivitas sistem (Spatie Activitylog)</p>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">Riwayat Aktivitas Sistem</h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Catatan riwayat tindakan pengguna dan perubahan data di dalam sistem</p>
         </div>
         <Button variant="danger" size="md" onclick={() => isClearDialogOpen = true}>
             <Trash2 class="w-4 h-4" />

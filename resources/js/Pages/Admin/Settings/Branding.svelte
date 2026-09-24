@@ -2,7 +2,7 @@
     import AppLayout from '@/Layouts/AppLayout.svelte';
     import Card from '@/Components/UI/Card.svelte';
     import BrandingUploader from '@/Components/UI/BrandingUploader.svelte';
-    import { Globe, LayoutDashboard, Eye, Sun, Moon, Smartphone, ShieldCheck, Sparkles } from 'lucide-svelte';
+    import { Globe, LayoutDashboard, Eye, Sun, Moon, Smartphone, ShieldCheck, Palette } from 'lucide-svelte';
     import type { BrandingAsset } from '@/lib/types';
 
     interface Props {
@@ -46,15 +46,15 @@
     };
 </script>
 
-<AppLayout title="Manajemen Branding & Identitas Visual">
+<AppLayout title="Logo & Tampilan Visual">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                <Sparkles class="w-5 h-5 text-indigo-500" />
-                <span>Site Branding & Visual Identity</span>
+                <Palette class="w-5 h-5 text-indigo-500" />
+                <span>Logo & Tampilan Visual</span>
             </h1>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Kelola logo, favicon, dan identitas visual publik serta admin panel secara terpisah dan dinamis
+                Kelola logo, ikon tab (favicon), dan tampilan visual website serta panel admin
             </p>
         </div>
 

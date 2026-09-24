@@ -1,7 +1,7 @@
 <script lang="ts">
     import AppLayout from '@/Layouts/AppLayout.svelte';
     import Card from '@/Components/UI/Card.svelte';
-    import { BarChart3, Eye, Newspaper, FileText, MessageSquare, Folder, TrendingUp, Sparkles } from 'lucide-svelte';
+    import { BarChart3, Eye, Newspaper, FileText, MessageSquare, Folder, TrendingUp } from 'lucide-svelte';
 
     interface Props {
         metrics: any;
@@ -13,14 +13,14 @@
     let { metrics = {}, topPosts = [], topPages = [], recentComments = [] }: Props = $props();
 </script>
 
-<AppLayout title="Analitik & Metrik CMS">
+<AppLayout title="Statistik Pengunjung">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
             <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <BarChart3 class="w-5 h-5 text-indigo-500" />
-                <span>Analitik & Performa CMS</span>
+                <span>Statistik Pengunjung & Konten</span>
             </h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Statistik jumlah tayangan artikel, halaman terpopuler, dan aktivitas konten</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Statistik jumlah pembaca artikel, halaman populer, dan aktivitas konten</p>
         </div>
     </div>
 
@@ -41,7 +41,7 @@
                 <FileText class="w-5 h-5" />
             </div>
             <p class="text-3xl font-extrabold text-white font-mono">{metrics.totalPages || 0}</p>
-            <p class="text-[10px] text-slate-500">Halaman Website Status Live</p>
+            <p class="text-[10px] text-slate-500">Halaman Website Aktif</p>
         </div>
 
         <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">

@@ -25,11 +25,11 @@
     <div class="relative overflow-hidden rounded-2xl bg-gradient-to-r from-indigo-600 via-indigo-700 to-purple-800 p-6 sm:p-8 text-white shadow-xl shadow-indigo-500/10">
         <div class="relative z-10 space-y-2 max-w-2xl">
             <Badge variant="primary" class="bg-white/10 text-white border-white/20 backdrop-blur-xs">
-                Laravel 13 &bull; Svelte 5 &bull; Tailwind v4
+                Panel Administrasi Utama
             </Badge>
-            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Selamat Datang di LaraSvelte Starterkit!</h1>
+            <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Selamat Datang di Panel Kendali!</h1>
             <p class="text-xs sm:text-sm text-indigo-100/90 leading-relaxed">
-                Fondasi starter kit tingkat produksi lengkap dengan Role-Based Access Control (RBAC), Spatie Media Library, Audit Logs, Data Table, dan API Sanctum Siap Pakai.
+                Kelola konten website, formulir pengunjung, akun pengguna, dan pengaturan sistem secara terpadu dalam satu tempat.
             </p>
         </div>
         <div class="absolute -right-8 -bottom-8 w-64 h-64 bg-white/5 rounded-full blur-2xl pointer-events-none"></div>
@@ -64,8 +64,8 @@
         <Card class="hover:border-purple-300 dark:hover:border-purple-800">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Peran & RBAC</p>
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{stats.total_roles} Role</h3>
+                    <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Peran Pengguna</p>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{stats.total_roles} Peran</h3>
                 </div>
                 <div class="p-3 bg-purple-50 dark:bg-purple-950/60 rounded-xl text-purple-600 dark:text-purple-400">
                     <ShieldCheck class="w-6 h-6" />
@@ -77,7 +77,7 @@
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">Aktivitas (7 Hari)</p>
-                    <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{stats.recent_activities_count} Event</h3>
+                    <h3 class="text-2xl font-bold text-slate-900 dark:text-slate-100 mt-1">{stats.recent_activities_count} Riwayat</h3>
                 </div>
                 <div class="p-3 bg-amber-50 dark:bg-amber-950/60 rounded-xl text-amber-600 dark:text-amber-400">
                     <Activity class="w-6 h-6" />
@@ -90,7 +90,7 @@
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Recent Audit Log Feed (2 Cols) -->
         <div class="lg:col-span-2">
-            <Card title="Aktivitas Terkini Sistem" description="Riwayat log tindakan pengguna dan audit trail otomatis">
+            <Card title="Aktivitas Terkini Sistem" description="Riwayat tindakan pengguna dan pencatatan sistem otomatis">
                 <div class="space-y-4">
                     {#if recentActivities.length === 0}
                         <p class="text-xs text-slate-400 text-center py-6">Belum ada aktivitas tercatat</p>
@@ -113,7 +113,7 @@
         <!-- Role Distribution & Tech Stack Info (1 Col) -->
         <div class="space-y-6">
             <!-- User Distribution -->
-            <Card title="Distribusi Pengguna per Role">
+            <Card title="Distribusi Pengguna per Peran">
                 <div class="space-y-3">
                     {#each usersByRole as item}
                         <div class="flex items-center justify-between text-xs">
@@ -125,25 +125,25 @@
             </Card>
 
             <!-- Features Checklist Card -->
-            <Card title="Fitur Siap Pakai" description="Sudah dikonfigurasi dan siap dipakai">
+            <Card title="Status Fitur Sistem" description="Fitur dan perlindungan yang aktif pada aplikasi">
                 <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
                     <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                        <CheckCircle2 class="w-4 h-4" /> Svelte 5 Runes Reactive State
+                        <CheckCircle2 class="w-4 h-4" /> Antarmuka Cepat & Responsif
                     </li>
                     <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                        <CheckCircle2 class="w-4 h-4" /> Spatie RBAC Role & Permission Matrix
+                        <CheckCircle2 class="w-4 h-4" /> Manajemen Peran & Hak Akses Pengguna
                     </li>
                     <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                        <CheckCircle2 class="w-4 h-4" /> Spatie Media Library Avatar Upload
+                        <CheckCircle2 class="w-4 h-4" /> Pengelolaan Berkas & Media Unggahan
                     </li>
                     <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                        <CheckCircle2 class="w-4 h-4" /> Audit Activity Log Traceability
+                        <CheckCircle2 class="w-4 h-4" /> Pencatatan Jejak Aktivitas Otomatis
                     </li>
                     <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                        <CheckCircle2 class="w-4 h-4" /> TanStack Data Table + CSV Export
+                        <CheckCircle2 class="w-4 h-4" /> Tabel Data Interaktif & Ekspor Laporan
                     </li>
                     <li class="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium">
-                        <CheckCircle2 class="w-4 h-4" /> Sanctum REST API Endpoints
+                        <CheckCircle2 class="w-4 h-4" /> Perlindungan & Enkripsi Data Pengguna
                     </li>
                 </ul>
             </Card>

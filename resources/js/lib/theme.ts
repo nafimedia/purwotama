@@ -7,7 +7,7 @@ export function getTheme(): Theme {
             return saved;
         }
     }
-    return 'system';
+    return 'light';
 }
 
 export function isDarkMode(): boolean {

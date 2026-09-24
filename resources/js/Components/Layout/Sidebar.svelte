@@ -7,7 +7,8 @@
         Activity,
         Settings,
         User,
-        Sparkles,
+        LayoutTemplate,
+        Palette,
         FileText,
         Newspaper,
         Folder,
@@ -113,10 +114,10 @@
         },
         {
             key: 'content',
-            title: 'Content Management',
+            title: 'Kelola Konten',
             items: [
                 {
-                    name: 'Artikel & Blog',
+                    name: 'Artikel & Berita',
                     href: '/admin/cms/posts',
                     icon: Newspaper,
                     active: currentUrl.startsWith('/admin/cms/posts'),
@@ -151,7 +152,7 @@
                     show: isModuleActive('calendar') && isModuleActive('posts'),
                 },
                 {
-                    name: 'Komentar',
+                    name: 'Komentar Pengunjung',
                     href: '/admin/cms/comments',
                     icon: MessageSquare,
                     active: currentUrl.startsWith('/admin/cms/comments'),
@@ -161,12 +162,12 @@
         },
         {
             key: 'builder',
-            title: 'Website Builder',
+            title: 'Desain Website',
             items: [
                 {
-                    name: 'Landing Builder',
+                    name: 'Editor Halaman Utama',
                     href: '/admin/landing-builder',
-                    icon: Sparkles,
+                    icon: LayoutTemplate,
                     active: currentUrl.startsWith('/admin/landing-builder'),
                     show: isModuleActive('landing_builder'),
                 },
@@ -178,7 +179,7 @@
                     show: isModuleActive('menus'),
                 },
                 {
-                    name: 'Form Builder',
+                    name: 'Pembuat Formulir',
                     href: '/admin/cms/forms',
                     icon: FileSpreadsheet,
                     active: currentUrl.startsWith('/admin/cms/forms'),
@@ -188,10 +189,10 @@
         },
         {
             key: 'media',
-            title: 'Media',
+            title: 'Galeri Media',
             items: [
                 {
-                    name: 'Media Library',
+                    name: 'Galeri Berkas & Gambar',
                     href: '/admin/cms/media',
                     icon: Image,
                     active: currentUrl.startsWith('/admin/cms/media'),
@@ -201,17 +202,17 @@
         },
         {
             key: 'seo',
-            title: 'SEO & Optimization',
+            title: 'Optimasi & Statistik',
             items: [
                 {
-                    name: 'Redirect Manager',
+                    name: 'Pengalihan Tautan',
                     href: '/admin/cms/redirects',
                     icon: ArrowRightLeft,
                     active: currentUrl.startsWith('/admin/cms/redirects'),
                     show: isModuleActive('redirects'),
                 },
                 {
-                    name: 'CMS Analitik',
+                    name: 'Statistik Pengunjung',
                     href: '/admin/cms/analytics',
                     icon: BarChart3,
                     active: currentUrl.startsWith('/admin/cms/analytics'),
@@ -221,7 +222,7 @@
         },
         {
             key: 'system',
-            title: 'System Management',
+            title: 'Pengaturan Sistem',
             items: [
                 {
                     name: 'Manajemen Pengguna',
@@ -231,14 +232,14 @@
                     show: hasPermission('users.view') && isModuleActive('users'),
                 },
                 {
-                    name: 'Role & Izin (RBAC)',
+                    name: 'Peran & Hak Akses',
                     href: '/admin/roles',
                     icon: ShieldCheck,
                     active: currentUrl.startsWith('/admin/roles'),
                     show: hasPermission('roles.view') && isModuleActive('roles'),
                 },
                 {
-                    name: 'Log Aktivitas',
+                    name: 'Riwayat Aktivitas',
                     href: '/admin/activity-logs',
                     icon: Activity,
                     active: currentUrl.startsWith('/admin/activity-logs'),
@@ -252,14 +253,14 @@
                     show: hasPermission('settings.view') && isModuleActive('settings'),
                 },
                 {
-                    name: 'Branding & Logo',
+                    name: 'Logo & Tampilan Visual',
                     href: '/admin/settings/branding',
-                    icon: Sparkles,
+                    icon: Palette,
                     active: currentUrl.startsWith('/admin/settings/branding'),
                     show: hasPermission('settings.view') && isModuleActive('settings'),
                 },
                 {
-                    name: 'Manajemen Modul',
+                    name: 'Manajemen Modul & Fitur',
                     href: '/admin/settings/modules',
                     icon: Layers,
                     active: currentUrl.startsWith('/admin/settings/modules'),
@@ -269,7 +270,7 @@
         },
         {
             key: 'account',
-            title: 'Account',
+            title: 'Akun Saya',
             items: [
                 {
                     name: 'Profil Saya',

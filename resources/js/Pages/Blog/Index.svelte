@@ -1,6 +1,6 @@
 <script lang="ts">
     import { router, Link } from '@inertiajs/svelte';
-    import { Search, Grid, List, Clock, Eye, Calendar, User, ArrowRight, Sparkles, Filter, Newspaper, ChevronRight } from 'lucide-svelte';
+    import { Search, Grid, List, Clock, Eye, Calendar, User, ArrowRight, Star, TrendingUp, Filter, Newspaper, ChevronRight } from 'lucide-svelte';
     import ThemeToggle from '@/Components/UI/ThemeToggle.svelte';
 
     interface Props {
@@ -75,7 +75,7 @@
                     <div class="lg:col-span-7 space-y-4">
                         <div class="flex items-center gap-2">
                             <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 flex items-center gap-1.5">
-                                <Sparkles class="w-3.5 h-3.5" /> Featured Article
+                                <Star class="w-3.5 h-3.5 fill-amber-300/30" /> Featured Article
                             </span>
                             {#if featuredPost.category}
                                 <span class="text-xs text-indigo-400 font-semibold uppercase tracking-wider font-mono">
@@ -273,7 +273,7 @@
                 <!-- Popular Articles Widget -->
                 <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
                     <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                        <Sparkles class="w-4 h-4 text-amber-400" />
+                        <TrendingUp class="w-4 h-4 text-amber-400" />
                         <span>Artikel Terpopuler</span>
                     </h3>
                     <div class="space-y-3">

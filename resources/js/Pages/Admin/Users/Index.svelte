@@ -100,7 +100,7 @@
 
     const filterOptions = $derived([
         {
-            label: 'Role',
+            label: 'Peran',
             key: 'role',
             options: roles.map(r => ({ label: r, value: r }))
         },
@@ -119,7 +119,7 @@
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">Manajemen Pengguna</h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Kelola pengguna sistem, penetapan role, dan status akun</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Kelola daftar akun pengguna, hak peran, dan status akses</p>
         </div>
         <Button variant="primary" size="md" onclick={openCreateModal}>
             <UserPlus class="w-4 h-4" />

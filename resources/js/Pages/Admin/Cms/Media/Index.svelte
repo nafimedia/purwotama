@@ -50,14 +50,14 @@
     }
 </script>
 
-<AppLayout title="Media Library (Asset Manager)">
+<AppLayout title="Galeri Media & Berkas">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
         <div>
             <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <ImageIcon class="w-5 h-5 text-indigo-500" />
-                <span>Media Library & Asset Manager</span>
+                <span>Galeri Berkas & Gambar</span>
             </h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Kelola berkas media gambar, dokumen PDF, dan aset digital website</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Kelola gambar, foto, dan dokumen pendukung website</p>
         </div>
 
         <Button variant="primary" size="md" onclick={() => isUploadOpen = true}>
@@ -108,7 +108,7 @@
                 onchange={(e: any) => uploadForm.file = e.target.files[0]}
                 class="w-full p-3 rounded-xl border border-slate-800 bg-slate-900 text-xs text-slate-300 font-mono"
             />
-            <Input label="Alt Text (SEO Image Description)" placeholder="Contoh: Banner ilustrasi FairuzKit" bind:value={uploadForm.alt_text} />
+            <Input label="Deskripsi Gambar (Teks Alternatif)" placeholder="Contoh: Foto gedung utama kantor..." bind:value={uploadForm.alt_text} />
             <Input label="Caption / Keterangan" placeholder="Keterangan singkat gambar..." bind:value={uploadForm.caption} />
             <div class="pt-2 flex justify-end gap-2">
                 <Button variant="outline" size="sm" onclick={() => isUploadOpen = false}>Batal</Button>

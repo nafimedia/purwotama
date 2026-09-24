@@ -1,55 +1,42 @@
 <script lang="ts">
     import { Link, page } from '@inertiajs/svelte';
     import {
-        Sparkles,
-        Zap,
-        ShieldCheck,
         Layers,
-        Cpu,
         Code2,
-        ArrowRight,
         CheckCircle2,
         Star,
-        Smartphone,
-        Lock,
-        Terminal,
-        Globe,
-        Rocket,
-        LayoutDashboard,
-        Newspaper,
-        Calendar,
-        Clock,
-        Eye,
-        BookOpen,
-        PhoneCall,
         MessageSquare,
         User,
-        Briefcase,
-        Server,
+        Users,
         Database,
-        Check,
         ExternalLink,
-        Send,
-        Laptop,
         GraduationCap,
         FileCheck2,
-        Binary,
         ShoppingCart,
         ChevronRight,
-        Calculator,
-        HelpCircle,
         ChevronDown,
-        Award,
-        ShieldAlert,
-        Clock3,
-        HeartHandshake,
-        ThumbsUp,
         Activity,
         Truck,
-        Building2,
         CreditCard,
         Building,
         TrendingUp,
+        ShieldCheck,
+        Clock,
+        Menu as MenuIcon,
+        X,
+        ArrowUpRight,
+        PhoneCall,
+        Check,
+        Server,
+        Smartphone,
+        Briefcase,
+        Receipt,
+        ShoppingBag,
+        Kanban,
+        Factory,
+        LifeBuoy,
+        FileText,
+        BookOpen,
     } from 'lucide-svelte';
 
     import ThemeToggle from '@/Components/UI/ThemeToggle.svelte';
@@ -83,1072 +70,810 @@
     const fairuzWa = `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20ingin%20konsultasi%20teknis%20pembuatan%20software%20di%20Purwotama%20Satria.`;
     const afifWa = `${afifWaBase}?text=Halo%20Mas%20Afif,%20saya%20tertarik%20diskusi%20kerjasama%20proyek%20di%20Purwotama%20Satria.`;
 
-    // Portfolio Filtering State
-    let activePortfolioTab = $state('all');
+    // State
+    let mobileMenuOpen = $state(false);
+    let openFaqIndex = $state<number | null>(0);
+    let selectedModuleId = $state('pos');
 
-    const portfolios = [
+    // Modul Sistem
+    const modules = [
         {
-            id: 1,
-            title: 'LMS (Learning Management System)',
-            category: 'education',
-            categoryLabel: 'EdTech & Edukasi',
-            badge: 'Platform Pembelajaran',
-            desc: 'Platform pembelajaran interaktif dengan manajemen kelas, materi video, kuis, evaluasi peserta, rekap nilai otomatis, dan sertifikat digital.',
-            features: [
-                'Live Progress Tracking',
-                'Bank Soal & Kuis Interaktif',
-                'Generate Sertifikat PDF',
-                'Modul Multi-Tingkat',
-            ],
-            gradient: 'from-indigo-600 via-purple-600 to-pink-500',
-            bgGlow: 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border-indigo-500/30',
-            icon: GraduationCap,
-        },
-        {
-            id: 2,
-            title: 'Eptunu CBT (Computer Based Test)',
-            category: 'education',
-            categoryLabel: 'Assessment Engine',
-            badge: 'Engine Ujian Online',
-            desc: 'Sistem ujian berbasis komputer berkapasitas tinggi dengan proteksi anti-cheat, bank soal acak, waktu otomatis, dan pemrosesan hasil seketika.',
-            features: [
-                'Proteksi Anti-Curang (Tab Lock)',
-                'Pengacakan Soal & Opsi',
-                'Nilai Real-time & Analisis',
-                'Kapasitas Ribuan Peserta',
-            ],
-            gradient: 'from-amber-500 via-orange-500 to-red-500',
-            bgGlow: 'bg-amber-500/15 text-amber-600 dark:text-amber-300 border-amber-500/30',
-            icon: FileCheck2,
-        },
-        {
-            id: 3,
-            title: 'Website Resmi UNU Purwokerto',
-            category: 'education',
-            categoryLabel: 'University Portal',
-            badge: 'Portal Kampus Resmi',
-            desc: 'Website portal resmi Universitas Nahdlatul Ulama Purwokerto terintegrasi dengan CMS berita kampus dinamis, informasi PMB, publikasi akademik, dan direktori prodi.',
-            features: [
-                'Portal Informasi PMB Kampus',
-                'CMS Berita & Pengumuman',
-                'Direktori Fakultas & Prodi',
-                'High Speed & SEO Optimized',
-            ],
-            gradient: 'from-emerald-600 via-teal-600 to-green-500',
-            bgGlow: 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border-emerald-500/30',
-            icon: Globe,
-        },
-        {
-            id: 4,
-            title: 'SIAKAD UNU Purwokerto (Sistem Akademik)',
-            category: 'education',
-            categoryLabel: 'Academic ERP Engine',
-            badge: 'Sistem Akademik Kampus',
-            desc: 'Sistem Informasi Akademik terpadu UNU Purwokerto untuk pengisian KRS online, transkrip nilai KHS, kurikulum, presensi dosen & mahasiswa, serta sinkronisasi PDDIKTI.',
-            features: [
-                'KRS & KHS Online Real-Time',
-                'Manajemen Transkrip Nilai',
-                'Portal Dosen & Mahasiswa',
-                'Integrasi PDDIKTI Feeder',
-            ],
-            gradient: 'from-blue-600 via-indigo-600 to-cyan-500',
-            bgGlow: 'bg-blue-500/15 text-blue-600 dark:text-blue-300 border-blue-500/30',
-            icon: GraduationCap,
-        },
-        {
-            id: 5,
-            title: 'Sistem Informasi Pendataan Ternak',
-            category: 'enterprise',
-            categoryLabel: 'Government & ERP',
-            badge: 'Manajemen Populasi',
-            desc: 'Platform sistem informasi inventarisasi populasi ternak, integrasi riwayat kesehatan hewan, siklus reproduksi, dan pemetaan wilayah peternakan.',
-            features: [
-                'Peta Geografis Peternakan',
-                'Rekam Medis & Vaksinasi',
-                'Ear-Tag Barcode Tracking',
-                'Laporan Populasi Daerah',
-            ],
-            gradient: 'from-teal-500 via-emerald-500 to-cyan-500',
-            bgGlow: 'bg-teal-500/15 text-teal-600 dark:text-teal-300 border-teal-500/30',
-            icon: Binary,
-        },
-        {
-            id: 6,
-            title: 'AAFI Official Website & Portal',
-            category: 'corporate',
-            categoryLabel: 'Corporate & Web',
-            badge: 'Web Portal Resmi',
-            desc: 'Website portal asosiasi profesional terintegrasi dengan CMS berita dinamis, direktori registrasi anggota, agenda kegiatan, dan galeri publikasi.',
-            features: [
-                'CMS Berita & Event Studio',
-                'Direktori Anggota Terverifikasi',
-                'Desain Modern & Responsif',
-                'SEO & High Speed Score',
-            ],
-            gradient: 'from-purple-600 via-pink-600 to-indigo-600',
-            bgGlow: 'bg-purple-500/15 text-purple-600 dark:text-purple-300 border-purple-500/30',
-            icon: Globe,
-        },
-        {
-            id: 7,
-            title: 'Sistem Kasir & POS (Point of Sale)',
-            category: 'pos',
-            categoryLabel: 'Retail & Multi-Branch',
-            badge: 'Kasir & Inventaris',
-            desc: 'Sistem aplikasi kasir bisnis modern terintegrasi dengan manajemen stok multi-cabang, barcode scanner, cetak struk thermal, dan laporan laba rugi.',
-            features: [
-                'Multi-Cabang & Multi-Kasir',
-                'Stok Barang Real-time',
-                'Integrasi Printer Thermal',
-                'Laporan Keuangan Otomatis',
-            ],
-            gradient: 'from-rose-500 via-pink-500 to-purple-600',
-            bgGlow: 'bg-rose-500/15 text-rose-600 dark:text-rose-300 border-rose-500/30',
+            id: 'pos',
+            category: 'ritel',
+            name: 'Kasir & Ritel (POS)',
+            shortName: 'Kasir POS',
+            badge: 'Toko & Ritel',
+            color: 'bg-[#E58A3C]',
+            tagline: 'Transaksi kasir kilat, cetak nota otomatis, dan sinkronisasi stok toko.',
+            desc: 'Aplikasi kasir modern untuk kecepatan transaksi di meja kasir. Mendukung barcode scanner, printer nota thermal, pembayaran QRIS/tunai, dan rekap omzet harian otomatis.',
             icon: ShoppingCart,
+            features: [
+                'Pencatatan nota kasir cepat (kurang dari 2 detik)',
+                'Stok barang otomatis berkurang setiap transaksi',
+                'Dukungan multi-kasir dan multi-cabang terpusat',
+                'Rekap omzet harian otomatis dikirim ke ponsel pemilik',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Kasir%20POS%20di%20Purwotama%20Satria.`,
         },
         {
-            id: 8,
-            title: 'SIMRS (Sistem Manajemen Rumah Sakit & Klinik)',
-            category: 'health',
-            categoryLabel: 'Healthcare & Medical',
-            badge: 'Rekam Medis & SIMRS',
-            desc: 'Sistem informasi manajemen fasilitas kesehatan terintegrasi Rekam Medis Elektronik (RME), manajemen antrean, apotek/farmasi, dan bridging API BPJS.',
+            id: 'inventory',
+            category: 'operasional',
+            name: 'Stok & Gudang Terpadu',
+            shortName: 'Gudang & Stok',
+            badge: 'Inventaris & Gudang',
+            color: 'bg-[#457B9D]',
+            tagline: 'Pantau persediaan barang real-time, cegah selisih, dan mutasi rapi.',
+            desc: 'Sistem tata kelola stok cerdas yang menghubungkan gudang utama dengan cabang penjualan. Menghitung mutasi masuk-keluar secara presisi dan memberi notifikasi saat barang hampir habis.',
+            icon: Database,
             features: [
-                'Rekam Medis Elektronik (RME)',
-                'Bridging BPJS & SATUSEHAT',
-                'Manajemen Obat & Laboratorium',
-                'Kasir Pasien & Billing',
+                'Peringatan otomatis saat stok barang mendekati batas minimum',
+                'Riwayat mutasi keluar-masuk barang terlacak per petugas',
+                'Kartu stok digital otomatis tanpa hitung manual',
+                'Surat jalan transfer barang antar gudang resmi & rapi',
             ],
-            gradient: 'from-cyan-500 via-blue-500 to-indigo-600',
-            bgGlow: 'bg-cyan-500/15 text-cyan-600 dark:text-cyan-300 border-cyan-500/30',
-            icon: Activity,
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Gudang%20dan%20Stok%20di%20Purwotama%20Satria.`,
         },
         {
-            id: 9,
-            title: 'Smart Fleet & Logistics Tracking System',
-            category: 'enterprise',
-            categoryLabel: 'Logistics & Supply Chain',
-            badge: 'Logistik & Ekspedisi',
-            desc: 'Platform pelacakan armada armada pengiriman dan manifest kargo secara real-time terintegrasi GPS, rute jalan teroptimasi, dan surat jalan digital.',
-            features: [
-                'Live GPS & Fleet Tracking',
-                'Surat Jalan Digital (e-POD)',
-                'Optimalisasi Rute Pengiriman',
-                'Manajemen Bahan Bakar',
-            ],
-            gradient: 'from-lime-500 via-emerald-500 to-teal-500',
-            bgGlow: 'bg-lime-500/15 text-lime-600 dark:text-lime-300 border-lime-500/30',
-            icon: Truck,
-        },
-        {
-            id: 10,
-            title: 'Hotel & Resort Management Engine',
-            category: 'corporate',
-            categoryLabel: 'Hospitality & Travel',
-            badge: 'Sistem Perhotelan',
-            desc: 'Aplikasi manajemen reservasi hotel, sistem check-in/out cepat, jadwal housekeeping, POS restoran hotel, serta analisis tingkat okupansi kamar.',
-            features: [
-                'Engine Reservasi Online',
-                'POS Resto & Minibar',
-                'Housekeeping Task Live',
-                'Laporan Occupancy Rate',
-            ],
-            gradient: 'from-pink-600 via-rose-500 to-orange-500',
-            bgGlow: 'bg-pink-500/15 text-pink-600 dark:text-pink-300 border-pink-500/30',
-            icon: Building2,
-        },
-        {
-            id: 11,
-            title: 'Fintech Core Credit & Microfinance System',
-            category: 'enterprise',
-            categoryLabel: 'Finance & Banking',
-            badge: 'Sistem Keuangan',
-            desc: 'Sistem informasi akuntansi dan simpan pinjam lembaga keuangan/koperasi dengan kalkulasi bunga otomatis, jadwal angsuran, dan audit OJK ready.',
-            features: [
-                'Kalkulator Angsuran Pinjaman',
-                'Akuntansi Neraca Otomatis',
-                'Manajemen Tabungan & Deposito',
-                'Laporan Keuangan Standar OJK',
-            ],
-            gradient: 'from-indigo-600 via-blue-600 to-cyan-500',
-            bgGlow: 'bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 border-indigo-500/30',
+            id: 'finance',
+            category: 'manajemen',
+            name: 'Akuntansi & Keuangan',
+            shortName: 'Akuntansi',
+            badge: 'Pembukuan Usaha',
+            color: 'bg-[#2A9D8F]',
+            tagline: 'Buku kas otomatis, pencatatan piutang, dan laporan laba rugi real-time.',
+            desc: 'Hilangkan kerumitan rekap pembukuan akhir bulan. Setiap transaksi langsung tercatat rapi ke dalam laporan laba rugi, neraca, dan arus kas usaha.',
             icon: CreditCard,
+            features: [
+                'Laporan laba rugi, arus kas, dan neraca tersaji instan kapan saja',
+                'Riwayat pengeluaran operasional terdokumentasi dengan bukti nota',
+                'Pencatatan piutang pelanggan dan utang suplier dengan pengingat tempo',
+                'Pencatatan otomatis dari sistem operasional tanpa selisih',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Keuangan%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'crm',
+            category: 'ritel',
+            name: 'CRM & Pipeline Penjualan',
+            shortName: 'CRM & Prospek',
+            badge: 'Penjualan & Klien',
+            color: 'bg-[#714B67]',
+            tagline: 'Catat prospek calon pembeli, jadwalkan tindak lanjut, dan pantau closing deal.',
+            desc: 'Membantu tim penjualan mengelola calon pembeli dari kontak awal hingga transaksi berhasil. Tidak ada lagi data prospek atau janji temu yang terlewat.',
+            icon: Briefcase,
+            features: [
+                'Pencatatan data kontak prospek dan sumber kedatangan calon pembeli',
+                'Tahapan pipeline visual (Prospek Masuk, Negosiasi, Penawaran, Kesepakatan)',
+                'Pengingat jadwal janji temu dan tindak lanjut (follow-up) otomatis',
+                'Riwayat percakapan dan kebutuhan spesifik tiap calon klien tersimpan rapi',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20CRM%20Penjualan%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'purchase',
+            category: 'ritel',
+            name: 'Pengadaan & Pembelian Suplier (PO)',
+            shortName: 'Pembelian & PO',
+            badge: 'Pengadaan Barang',
+            color: 'bg-[#875A7B]',
+            tagline: 'Penerbitan surat pesanan suplier (PO), kontrol faktur beli, dan cek barang masuk.',
+            desc: 'Kendali penuh atas pembelian bahan baku dan barang dagangan. Cegah selisih harga dari suplier dan pastikan barang yang diterima sesuai persis dengan pesanan.',
+            icon: Receipt,
+            features: [
+                'Penerbitan surat Purchase Order (PO) resmi siap cetak dan kirim PDF',
+                'Pencatatan perbandingan harga suplier untuk efisiensi modal belanja',
+                'Verifikasi penerimaan barang yang langsung menambah stok gudang',
+                'Pengingat jatuh tempo pembayaran tagihan suplier agar arus kas terjaga',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Pengadaan%20PO%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'ecommerce',
+            category: 'ritel',
+            name: 'Toko Online Terpadu (eCommerce)',
+            shortName: 'Toko Online',
+            badge: 'Katalog Belanja',
+            color: 'bg-[#E76F51]',
+            tagline: 'Website belanja mandiri 24 jam yang tersambung langsung dengan kasir dan stok fisik.',
+            desc: 'Perluas jangkauan pembeli dengan toko online merek Anda sendiri. Setiap pesanan online yang masuk otomatis memotong stok fisik tanpa perlu update manual ganda.',
+            icon: ShoppingBag,
+            features: [
+                'Katalog produk visual dengan varian ukuran, warna, dan harga grosir',
+                'Sinkronisasi otomatis stok fisik (mencegah order ganda saat stok habis)',
+                'Hitung estimasi ongkos kirim ekspedisi otomatis ke seluruh Indonesia',
+                'Notifikasi pesanan baru masuk langsung ke WhatsApp pengelola toko',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Toko%20Online%20eCommerce%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'project',
+            category: 'operasional',
+            name: 'Manajemen Proyek & Tugas Tim',
+            shortName: 'Proyek & Tugas',
+            badge: 'Kolaborasi Kerja',
+            color: 'bg-[#009688]',
+            tagline: 'Papan tugas Kanban, batas waktu pekerjaan, dan kejelasan tanggung jawab staf.',
+            desc: 'Visualisasikan alur proyek kantor atau operasional lapangan. Setiap anggota tim mengetahui tugas harian yang menjadi tanggung jawabnya tanpa harus rapat panjang.',
+            icon: Kanban,
+            features: [
+                'Papan kerja Kanban visual dengan kolom alur (Rencana, Berjalan, Review, Selesai)',
+                'Penetapan penanggung jawab tugas dan batas waktu penyelesaian (deadline)',
+                'Lampiran berkas pekerjaan, catatan instruksi, dan progres persentase',
+                'Notifikasi pengingat sebelum tugas mendekati batas waktu',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Manajemen%20Proyek%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'manufacturing',
+            category: 'operasional',
+            name: 'Manufaktur & Produksi Pabrik',
+            shortName: 'Manufaktur',
+            badge: 'Pabrik & UMKM',
+            color: 'bg-[#D47A4A]',
+            tagline: 'Perencanaan bahan baku (BOM), jadwal lini produksi, dan kalkulasi HPP akurat.',
+            desc: 'Dirancang untuk industri konveksi, manufaktur olahan makanan, bengkel perakitan, dan pabrik UMKM. Pantau pemakaian bahan baku dan hitung biaya pokok produksi per unit.',
+            icon: Factory,
+            features: [
+                'Formulasi resep / komposisi bahan baku (Bill of Materials) per produk',
+                'Pemotongan otomatis stok bahan mentah saat Surat Perintah Kerja (SPK) terbit',
+                'Pencatatan biaya tenaga kerja dan operasional untuk penentuan HPP akurat',
+                'Pemantauan status pengerjaan barang di tiap pos produksi secara real-time',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Manufaktur%20Produksi%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'helpdesk',
+            category: 'operasional',
+            name: 'Pusat Bantuan & Layanan Aduan',
+            shortName: 'Pusat Bantuan',
+            badge: 'Layanan Pelanggan',
+            color: 'bg-[#017E84]',
+            tagline: 'Penerimaan tiket aduan pelanggan, delegasi teknisi, dan pemantauan solusi tuntas.',
+            desc: 'Pastikan keluhan dan permintaan bantuan pelanggan tertangani cepat. Setiap aduan memiliki nomor tiket pelacakan sehingga progresnya terpantau jelas bagi pemilik usaha.',
+            icon: LifeBuoy,
+            features: [
+                'Penerbitan nomor tiket aduan otomatis dari form website atau pesan masuk',
+                'Pembagian tiket ke teknisi yang bertugas sesuai keahlian masalah',
+                'Riwayat penanganan masalah tersimpan rapi untuk evaluasi kualitas layanan',
+                'Penilaian kepuasan pelanggan bintang setelah masalah selesai ditangani',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Pusat%20Bantuan%20Helpdesk%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'documents',
+            category: 'manajemen',
+            name: 'Arsip Surat & Tanda Tangan Digital',
+            shortName: 'Arsip Dokumen',
+            badge: 'Dokumen & Legal',
+            color: 'bg-[#3D8DAE]',
+            tagline: 'Tata kelola arsip digital aman, pencarian cepat, dan verifikasi tanda tangan QR.',
+            desc: 'Tinggalkan lemari dokumen fisik yang memakan tempat. Simpan surat keputusan, kontrak kerjasama, faktur, dan berkas penting dengan keamanan terjamin dan pencarian instan.',
+            icon: FileText,
+            features: [
+                'Pencarian kilat dokumen berdasarkan nomor surat, tanggal, atau perihal',
+                'Pemberian tanda tangan digital resmi dilengkapi kode QR pembuktian keaslian',
+                'Hak akses berkas berjenjang untuk melindungi dokumen rahasia instansi',
+                'Penyimpanan digital aman dan pencadangan berkala otomatis',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Arsip%20Dokumen%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'knowledge',
+            category: 'manajemen',
+            name: 'Pusat Pengetahuan & SOP Kerja',
+            shortName: 'SOP & Panduan',
+            badge: 'Standar Operasional',
+            color: 'bg-[#5B629A]',
+            tagline: 'Dokumentasi SOP kerja karyawan, panduan penanganan kendala, dan basis pengetahuan.',
+            desc: 'Bangun budaya kerja yang terstandar. Simpan instruksi kerja, pedoman penggunaan alat, dan SOP operasional di satu tempat yang mudah diakses seluruh karyawan baru.',
+            icon: BookOpen,
+            features: [
+                'Penyusunan artikel SOP terstruktur per divisi dan departemen kerja',
+                'Pencarian kata kunci cepat saat karyawan menghadapi kendala operasional',
+                'Pembaruan versi dokumen panduan terdokumentasi rapi',
+                'Akses baca dari ponsel memudahkan staf lapangan memeriksa prosedur',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20modul%20Knowledge%20SOP%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'hris',
+            category: 'manajemen',
+            name: 'Kepegawaian & Presensi',
+            shortName: 'Presensi & HR',
+            badge: 'Manajemen Pegawai',
+            color: 'bg-[#588B76]',
+            tagline: 'Presensi foto GPS dari ponsel, pengajuan izin cuti, dan slip gaji rapi.',
+            desc: 'Aplikasi kehadiran staf dengan verifikasi lokasi GPS dan swafoto. Mempermudah persetujuan cuti secara transparan dan rekap kehadiran periodik siap pakai.',
+            icon: Users,
+            features: [
+                'Validasi lokasi GPS dan swafoto memastikan kehadiran di tempat kerja',
+                'Pengajuan izin dan cuti langsung disetujui pimpinan via ponsel',
+                'Rekap kehadiran periodik siap ekspor tanpa input manual',
+                'Transparansi slip gaji dan rincian tunjangan staf',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Presensi%20HRIS%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'cbt',
+            category: 'khusus',
+            name: 'Ujian Komputer (CBT)',
+            shortName: 'Ujian CBT',
+            badge: 'Sekolah & Kampus',
+            color: 'bg-[#264653]',
+            tagline: 'Ujian online kapasitas ribuan peserta dengan sistem proteksi anti-curang.',
+            desc: 'Platform ujian berbasis komputer untuk sekolah, kampus, atau tes seleksi kerja. Stabil menampung ribuan peserta serentak dengan pengacakan soal dan nilai instan.',
+            icon: FileCheck2,
+            features: [
+                'Proteksi layar kunci (tab-lock) mencegah peserta browsing jawaban',
+                'Pengacakan nomor soal dan opsi jawaban untuk tiap peserta',
+                'Hasil nilai dan analisis butir soal langsung keluar seketika',
+                'Tetap menyimpan jawaban meskipun koneksi internet terputus',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Ujian%20Online%20CBT%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'simrs',
+            category: 'khusus',
+            name: 'Klinik & Faskes (SIMRS)',
+            shortName: 'SIMRS Medis',
+            badge: 'Klinik & Medis',
+            color: 'bg-[#D1495B]',
+            tagline: 'Antrean poli, Rekam Medis Elektronik (RME), dan apotek farmasi terpadu.',
+            desc: 'Tata kelola fasilitas kesehatan terpadu mulai dari loket pendaftaran, antrean dokter poli, rekam medis digital (RME), laboratorium, hingga kasir apotek tanpa tumpukan kertas.',
+            icon: Activity,
+            features: [
+                'Rekam Medis Elektronik (RME) rapi & riwayat pasien mudah dicari',
+                'Alur resep dokter langsung terhubung ke bagian farmasi',
+                'Kalkulasi tagihan dan rincian obat akurat tanpa selisih',
+                'Siap integrasi data layanan kesehatan standar pemerintah',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Klinik%20SIMRS%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'lms',
+            category: 'khusus',
+            name: 'Akademik & Belajar (LMS)',
+            shortName: 'LMS Belajar',
+            badge: 'Portal Belajar',
+            color: 'bg-[#6A4C93]',
+            tagline: 'Distribusi materi, tugas daring, absensi kelas, dan sertifikat otomatis.',
+            desc: 'Portal belajar digital untuk lembaga kursus, sekolah, dan kampus. Memfasilitasi materi video terstruktur, kuis mandiri, rekap kehadiran, serta sertifikat digital.',
+            icon: GraduationCap,
+            features: [
+                'Materi tersusun rapi per bab dengan video & kuis pemahaman',
+                'Pemantauan progres belajar siswa secara transparan bagi pendidik',
+                'Sertifikat kelulusan digital otomatis berformat resmi',
+                'Forum diskusi kelas dan pengumpulan tugas tanpa kertas',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20LMS%20Belajar%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'logistics',
+            category: 'operasional',
+            name: 'Ekspedisi & Armada',
+            shortName: 'Ekspedisi',
+            badge: 'Distribusi & Armada',
+            color: 'bg-[#E07A5F]',
+            tagline: 'Surat jalan digital kode QR, pemantauan sopir, dan efisiensi pengantaran.',
+            desc: 'Solusi lengkap bagi distributor dan pengusaha ekspedisi untuk mengatur rute kirim barang, bukti foto penerima paket, dan pencatatan operasional armada.',
+            icon: Truck,
+            features: [
+                'Penerbitan surat jalan cepat dengan kode QR tanda bukti penerima',
+                'Status pengiriman terlacak secara transparan dari gudang ke tujuan',
+                'Pencatatan riwayat servis kendaraan dan penggantian oli berkala',
+                'Pengendalian biaya operasional bahan bakar per kilometer',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Logistik%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'website',
+            category: 'manajemen',
+            name: 'Profil Bisnis & Portal Web',
+            shortName: 'Website Profil',
+            badge: 'Branding & Profil',
+            color: 'bg-[#4F5D75]',
+            tagline: 'Website profil perusahaan cepat, elegan, ramah ponsel, dan mudah dikelola.',
+            desc: 'Membangun kehadiran digital profesional untuk perusahaan, instansi, atau sekolah. Dilengkapi pengelola konten mandiri yang mudah digunakan tanpa perlu paham koding.',
+            icon: Building,
+            features: [
+                'Desain elegan, responsif di HP, dan kecepatan loading tinggi',
+                'Manajemen artikel berita, portofolio, dan galeri kegiatan mandiri',
+                'Teroptimasi ramah mesin pencari (SEO) untuk mudah ditemukan calon klien',
+                'Terhubung langsung dengan tombol WhatsApp dan formulir kontak',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20Website%20Profil%20Bisnis%20di%20Purwotama%20Satria.`,
+        },
+        {
+            id: 'form',
+            category: 'manajemen',
+            name: 'Formulir & Pendaftaran Online',
+            shortName: 'Formulir Online',
+            badge: 'Registrasi Online',
+            color: 'bg-[#C05C7E]',
+            tagline: 'Formulir pendaftaran murid baru, rekrutmen pegawai, dan survei digital.',
+            desc: 'Tinggalkan formulir kertas yang rentan tercecer. Kumpulkan data pendaftaran, survei kepuasan, atau permohonan layanan secara digital dengan rekap otomatis.',
+            icon: Layers,
+            features: [
+                'Pembuatan form online kustom sesuai kebutuhan data formulir',
+                'Rekap hasil pendaftaran tersusun rapi otomatis siap unduh',
+                'Dukungan unggah berkas PDF/foto KTP/ijazah secara aman',
+                'Notifikasi pemberitahuan masuk otomatis via WhatsApp pengurus',
+            ],
+            waUrl: `${fairuzWaBase}?text=Halo%20Mas%20Fairuz,%20saya%20tertarik%20dengan%20sistem%20Formulir%20Pendaftaran%20di%20Purwotama%20Satria.`,
         },
     ];
 
-    const filteredPortfolios = $derived(
-        activePortfolioTab === 'all' ? portfolios : portfolios.filter((p) => p.category === activePortfolioTab)
+    const selectedModule = $derived(
+        modules.find((m) => m.id === selectedModuleId) || modules[0]
     );
 
-    // Interactive Project Estimator State
-    let selectedProjectType = $state('Web App & System ERP');
-    let selectedPlatform = $state('Web Dashboard & REST API');
-    let selectedComplexity = $state('Menengah (Multi-User & Reporting)');
+    // Keunggulan
+    const advantages = [
+        {
+            title: '100% Milik Anda Seutuhnya',
+            desc: 'Sistem menjadi aset digital penuh milik bisnis Anda tanpa batasan pengguna atau ketergantungan lisensi.',
+            icon: ShieldCheck,
+        },
+        {
+            title: 'Sesuai Alur Kerja Anda',
+            desc: 'Sistem kami rancang mengikuti SOP kerja usaha Anda, bukan sebaliknya.',
+            icon: Layers,
+        },
+        {
+            title: 'Ringan & Ramah Ponsel',
+            desc: 'Aplikasi cepat dimuat dan nyaman digunakan dari laptop maupun smartphone.',
+            icon: Smartphone,
+        },
+        {
+            title: 'Dukungan Langsung Pengembang',
+            desc: 'Konsultasi teknis langsung bersama Fairuz & Afif secara cepat tanpa birokrasi berbelit.',
+            icon: User,
+        },
+    ];
 
-    const estimatedBudget = $derived.by(() => {
-        let base = 45000000;
-        if (selectedProjectType === 'Mobile App (Android & iOS)') base += 15000000;
-        if (selectedProjectType === 'EdTech LMS & CBT Engine') base += 10000000;
-        if (selectedProjectType === 'Sistem Kasir & Multi-Branch POS') base += 8000000;
-        if (selectedProjectType === 'SIMRS / Logistics Fleet ERP') base += 20000000;
-
-        if (selectedComplexity === 'Kompleks (Multi-Branch, Custom API & Security)') base += 15000000;
-        if (selectedComplexity === 'Enterprise High Scalability') base += 35000000;
-
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(
-            base
-        );
-    });
-
-    const estimatorWaUrl = $derived.by(() => {
-        const text = `Halo%20Purwotama%20Satria,%20saya%20ingin%20konsultasi%20estimasi%20proyek:%0A-%20Tipe:%20${encodeURIComponent(selectedProjectType)}%0A-%20Platform:%20${encodeURIComponent(selectedPlatform)}%0A-%20Skala:%20${encodeURIComponent(selectedComplexity)}%0A-%20Estimasi%20Anggaran:%20${encodeURIComponent(estimatedBudget)}.%20Bisa%20diskusi%20lebih%20lanjut?`;
-        return `${fairuzWaBase}?text=${text}`;
-    });
-
-    // Accordion FAQ State
-    let activeFaq = $state<number | null>(0);
-
-    function toggleFaq(index: number) {
-        activeFaq = activeFaq === index ? null : index;
-    }
-
+    // FAQ
     const faqs = [
         {
-            q: 'Mengapa memilih Purwotama Satria dibanding agency software lain?',
-            a: 'Di Purwotama Satria, Anda berkonsultasi dan ditangani langsung oleh Chief Developer (Fairuz) dan Owner (Afif). Kami menjamin kode 100% milik Anda tanpa royalti tersembunyi, arsitektur modern super cepat (Laravel 13 + Svelte 5), serta garansi pendampingan pasca rilis.',
+            q: 'Berapa biaya dan lama waktu pembuatan sistem?',
+            a: 'Biaya dan durasi disesuaikan dengan modul yang Anda butuhkan, mulai dari hitungan minggu untuk modul standar hingga sistem kustom skala besar. Hubungi kami untuk estimasi transparan.',
         },
         {
-            q: 'Apakah source code dan database sepenuhnya menjadi hak milik saya?',
-            a: 'YA, 100%! Seluruh kode sumber (source code), struktur basis data, dokumen arsitektur, dan kredensial server sepenuhnya diserahkan kepada Anda setelah proyek selesai.',
+            q: 'Bagaimana model kepemilikan sistem yang dibangun?',
+            a: 'Sistem sepenuhnya menjadi aset digital milik bisnis Anda (putus beli) dengan kendali penuh atas data dan operasional.',
         },
         {
-            q: 'Berapa lama waktu pengerjaan untuk sebuah sistem kustom?',
-            a: 'Durasi pengerjaan bervariasi tergantung skala proyek. Untuk aplikasi web sedang (seperti POS Kasir / Web Portal) memerlukan waktu 2-4 minggu. Untuk sistem enterprise kompleks (ERP / LMS & CBT / SIMRS) berkisar antara 4-8 minggu dengan metode Agile Sprint transparan.',
+            q: 'Bagaimana jika alur bisnis kami memiliki aturan khusus?',
+            a: 'Kami mendiskusikan kebutuhan Anda secara detail sebelum pengerjaan agar seluruh fitur dan alur persetujuan sesuai persis dengan SOP operasional Anda.',
         },
         {
-            q: 'Bagaimana dengan dukungan garansi & maintenance setelah rilis?',
-            a: 'Kami memberikan Garansi Pemeliharaan Gratis selama 3-6 bulan setelah peluncuran untuk memastikan sistem bebas dari bug, aman dari celah cyber, dan berjalan 100% stabil di server Anda.',
+            q: 'Apakah sistem bisa diakses dari smartphone atau tablet?',
+            a: 'Tentu. Seluruh sistem dirancang responsif sehingga nyaman diakses dari ponsel, tablet, kasir, hingga komputer kantor.',
         },
         {
-            q: 'Apakah bisa melakukan konsultasi atau meeting online/offline terlebih dahulu?',
-            a: 'Sangat bisa! Anda dapat melakukan konsultasi gratis via Zoom, Google Meet, atau WhatsApp call bersama Afif & Fairuz untuk membedah ide dan kebutuhan teknis bisnis Anda sebelum membuat kesepakatan.',
+            q: 'Bagaimana dengan pelatihan staf dan bantuan teknis?',
+            a: 'Kami menyertakan sesi panduan bagi staf, buku panduan tertulis, serta masa garansi perawatan teknis berkala.',
         },
     ];
 
-    const services = [
-        {
-            title: 'Custom Web & SaaS Development',
-            desc: 'Pengembangan aplikasi web sesuai alur bisnis kustom berbasis Laravel 13, Svelte 5, dan Inertia.js untuk performa luar biasa.',
-            icon: Laptop,
-            color: 'text-indigo-600 dark:text-indigo-400 bg-indigo-500/15 border-indigo-500/30',
-        },
-        {
-            title: 'Enterprise ERP & Business Systems',
-            desc: 'Digitalisasi sistem manajemen operasional, inventaris, HRIS, hingga modul akuntansi terpadu.',
-            icon: Server,
-            color: 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/15 border-emerald-500/30',
-        },
-        {
-            title: 'Mobile App Development',
-            desc: 'Aplikasi Android dan iOS native & cross-platform berkinerja tinggi menggunakan Flutter dan React Native.',
-            icon: Smartphone,
-            color: 'text-amber-600 dark:text-amber-400 bg-amber-500/15 border-amber-500/30',
-        },
-        {
-            title: 'System Integration & API Automation',
-            desc: 'Integrasi sistem pembayaran (Payment Gateway), ekspedisi, WhatsApp Bot, dan arsitektur API kustom.',
-            icon: Zap,
-            color: 'text-cyan-600 dark:text-cyan-400 bg-cyan-500/15 border-cyan-500/30',
-        },
-        {
-            title: 'Dynamic Form & CBT Studio',
-            desc: 'Sistem ujian online, survei kepuasan, dan formulir pengumpulan data dinamis berbasis web.',
-            icon: Layers,
-            color: 'text-purple-600 dark:text-purple-400 bg-purple-500/15 border-purple-500/30',
-        },
-        {
-            title: 'DevOps & Security Audit',
-            desc: 'Penyetelan VPS/Cloud server, isolasi keamanan, proteksi data, serta garansi pemeliharaan berkelanjutan.',
-            icon: ShieldCheck,
-            color: 'text-rose-600 dark:text-rose-400 bg-rose-500/15 border-rose-500/30',
-        },
-    ];
-
-    const processSteps = [
-        {
-            step: '01',
-            title: 'Konsultasi & Analisis',
-            desc: 'Diskusi kebutuhan teknis bersama Afif & Fairuz untuk menentukan scope dan solusi terbaik.',
-        },
-        {
-            step: '02',
-            title: 'Blueprint & UI/UX Design',
-            desc: 'Penyusunan arsitektur sistem, alur basis data, dan prototype antarmuka visual yang estetik.',
-        },
-        {
-            step: '03',
-            title: 'Clean Development',
-            desc: 'Pengkodean modular berstandar industri dengan proteksi type safety dan pengujian berulang.',
-        },
-        {
-            step: '04',
-            title: 'Security Audit & QA',
-            desc: 'Pengujian celah keamanan, optimasi beban server, serta audit performa secara ketat.',
-        },
-        {
-            step: '05',
-            title: 'Deployment & Training',
-            desc: 'Peluncuran server produksi, pelatihan penggunaan sistem, dan pendampingan pasca rilis.',
-        },
-    ];
-
-    const stats = [
-        { value: '50+', label: 'Proyek Sistem Selesai' },
-        { value: '99.9%', label: 'Uptime & Keandalan' },
-        { value: '100%', label: 'Source Code Kustom' },
-        { value: '24/7', label: 'Dukungan Garansi' },
-    ];
+    function toggleFaq(index: number) {
+        openFaqIndex = openFaqIndex === index ? null : index;
+    }
 </script>
 
 <svelte:head>
-    <title>Purwotama Satria — Studio Jasa Pembuatan Software & Sistem Informasi Profesional</title>
+    <title>Purwotama Satria — Solusi Sistem Informasi & Software Bisnis Kustom</title>
     <meta
         name="description"
-        content="Purwotama Satria menyediakan jasa pembuatan software kustom, sistem informasi enterprise, LMS, CBT, POS Kasir, SIMRS, dan aplikasi mobile dengan arsitektur modern."
+        content="Purwotama Satria menyediakan layanan pembuatan software bisnis, kasir POS, stok gudang, ujian CBT, SIMRS klinik, LMS, dan sistem operasional kustom untuk bisnis dan instansi."
     />
     {#if branding?.public_favicon}
         <link rel="icon" href={branding.public_favicon} />
     {/if}
 </svelte:head>
 
-<div
-    class="relative min-h-screen overflow-x-hidden bg-slate-50 font-sans text-slate-900 transition-colors duration-300 selection:bg-indigo-500 selection:text-white dark:bg-slate-950 dark:text-slate-100"
->
-    <!-- ULTRA VIBRANT NEON AMBIENT MESH ORBS -->
-    <div class="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-        <div
-            class="animate-float-slow absolute -top-40 -left-40 h-[700px] w-[700px] rounded-full bg-gradient-to-tr from-indigo-600/30 via-purple-600/25 to-pink-500/20 blur-[130px]"
-        ></div>
-        <div
-            class="animate-float-delayed absolute top-1/3 -right-40 h-[700px] w-[700px] rounded-full bg-gradient-to-tr from-cyan-500/25 via-blue-600/25 to-purple-600/20 blur-[150px]"
-        ></div>
-        <div
-            class="animate-float-slow absolute bottom-10 left-1/3 h-[750px] w-[750px] rounded-full bg-gradient-to-tr from-emerald-500/20 via-teal-500/25 to-indigo-600/20 blur-[160px]"
-        ></div>
-    </div>
+<div class="min-h-screen bg-[#FAF8F5] font-sans text-slate-800 antialiased selection:bg-[#714B67] selection:text-white dark:bg-[#0E0D15] dark:text-slate-200">
 
-    <!-- Top Announcement Bar -->
-    <div
-        class="relative z-50 border-b border-indigo-500/30 bg-gradient-to-r from-indigo-900 via-purple-950 to-indigo-900 px-4 py-2.5 text-center text-xs font-bold text-white shadow-md"
-    >
-        <div class="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-2">
-            <span
-                class="inline-flex items-center gap-1 rounded-full border border-indigo-400/40 bg-indigo-500/30 px-3 py-0.5 text-[11px] font-extrabold text-indigo-200 shadow-[0_0_12px_rgba(99,102,241,0.4)]"
-            >
-                <Sparkles class="h-3.5 w-3.5 animate-spin text-amber-300" /> Studio Software Kustom
-            </span>
-            <span>Solusi Sistem Informasi Enterprise, LMS, CBT, POS Kasir & SIMRS. Konsultasi Gratis!</span>
-            <a
-                href="#estimator"
-                class="inline-flex items-center gap-0.5 font-extrabold text-indigo-300 underline hover:text-white"
-            >
-                Hitung Estimasi Proyek <ChevronRight class="h-3 w-3" />
-            </a>
-        </div>
-    </div>
-
-    <!-- Navigation Header with Theme Toggle -->
-    <header
-        class="sticky top-0 z-40 border-b border-slate-200/80 bg-white/90 shadow-sm backdrop-blur-2xl transition-all dark:border-slate-800/80 dark:bg-slate-950/90"
-    >
-        <div class="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-            <!-- Brand Logo with High-Contrast White Background Badge for Crisp Visibility -->
-            <Link href="/" class="group flex items-center gap-3">
-                <div
-                    class="h-12 w-12 flex-shrink-0 rounded-2xl border border-indigo-200 bg-white p-1.5 shadow-md shadow-indigo-500/40 transition-transform duration-300 group-hover:scale-105 group-hover:shadow-indigo-500/60 dark:border-indigo-500/40"
-                >
+    <!-- NAVBAR (PASTEL HEADER MINIMALIS) -->
+    <header class="sticky top-0 z-40 border-b border-slate-200/80 bg-[#FAF8F5]/90 backdrop-blur-md dark:border-slate-800/80 dark:bg-[#0E0D15]/90">
+        <div class="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
+            <!-- Brand Logo -->
+            <Link href="/" class="flex items-center gap-3">
+                <div class="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white p-1.5 shadow-xs dark:border-slate-800 dark:bg-slate-900">
                     <img
                         src="/images/branding/purwotama_logo.png"
-                        alt="Purwotama Satria Logo"
+                        alt="Purwotama Logo"
                         class="h-full w-full object-contain"
                     />
                 </div>
                 <div class="flex flex-col">
-                    <span
-                        class="bg-gradient-to-r from-slate-900 via-indigo-900 to-purple-800 bg-clip-text text-xl font-black tracking-tight text-transparent dark:from-white dark:via-slate-100 dark:to-indigo-200"
-                    >
+                    <span class="text-base font-bold tracking-tight text-slate-900 dark:text-white">
                         Purwotama Satria
                     </span>
-                    <span class="text-[10px] font-black tracking-widest text-indigo-600 uppercase dark:text-indigo-400"
-                        >Software & System Studio</span
-                    >
+                    <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+                        Software & Sistem Informasi
+                    </span>
                 </div>
             </Link>
 
-            <!-- Navigation Links -->
-            <nav class="hidden items-center gap-8 text-sm font-bold text-slate-700 md:flex dark:text-slate-200">
-                <a href="#why-us" class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400"
-                    >Keunggulan</a
-                >
-                <a href="#services" class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400"
-                    >Layanan</a
-                >
-                <a href="#portfolio" class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400"
-                    >Portofolio</a
-                >
-                <a
-                    href="#estimator"
-                    class="flex items-center gap-1 font-extrabold text-indigo-600 transition-colors hover:text-indigo-600 dark:text-indigo-400 dark:hover:text-indigo-400"
-                >
-                    <Calculator class="h-4 w-4 text-indigo-500" /> Estimator
-                </a>
-                <a href="#faq" class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400">FAQ</a>
-                <a href="#contact" class="transition-colors hover:text-indigo-600 dark:hover:text-indigo-400">Kontak</a>
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden items-center gap-6 text-sm font-medium text-slate-600 md:flex dark:text-slate-300">
+                <a href="#modul" class="transition-colors hover:text-[#714B67] dark:hover:text-[#E8D6E3]">Apps</a>
+                <a href="#keunggulan" class="transition-colors hover:text-[#714B67] dark:hover:text-[#E8D6E3]">Keunggulan</a>
+                <a href="#faq" class="transition-colors hover:text-[#714B67] dark:hover:text-[#E8D6E3]">Tanya Jawab</a>
+                <a href="#kontak" class="transition-colors hover:text-[#714B67] dark:hover:text-[#E8D6E3]">Kontak</a>
             </nav>
 
-            <!-- Action Buttons & Theme Switcher -->
-            <div class="flex items-center gap-3">
+            <!-- Actions & Theme Toggle -->
+            <div class="flex items-center gap-2.5">
                 <ThemeToggle />
 
                 <a
                     href={fairuzWa}
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="hidden items-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-4 py-2.5 text-xs font-black text-slate-950 shadow-lg shadow-emerald-500/30 transition-all duration-300 hover:from-emerald-400 hover:to-cyan-400 active:scale-95 sm:inline-flex"
+                    class="hidden items-center gap-1.5 rounded-lg bg-emerald-600 px-3.5 py-2 text-xs font-semibold text-white shadow-xs transition-all hover:bg-emerald-700 sm:inline-flex"
                 >
-                    <MessageSquare class="h-4 w-4 fill-slate-950 text-emerald-500" />
-                    <span>Konsultasi WA</span>
+                    <MessageSquare class="h-3.5 w-3.5" />
+                    <span>WhatsApp</span>
                 </a>
 
                 {#if authUser}
                     <Link
                         href="/admin/dashboard"
-                        class="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2.5 text-xs font-bold text-white shadow-md shadow-indigo-500/25 transition-all duration-300 hover:from-indigo-500 hover:to-purple-500 active:scale-95"
+                        class="inline-flex items-center gap-1.5 rounded-lg bg-[#714B67] px-3.5 py-2 text-xs font-semibold text-white transition-all hover:bg-[#5C3C54]"
                     >
-                        <LayoutDashboard class="h-4 w-4" />
                         <span>Dashboard</span>
                     </Link>
                 {:else}
                     <Link
                         href="/login"
-                        class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-slate-100 px-4 py-2.5 text-xs font-bold text-slate-800 transition-colors hover:bg-slate-200 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                        class="hidden rounded-lg border border-slate-300 px-3 py-2 text-xs font-semibold text-slate-700 transition-colors hover:bg-white sm:inline-flex dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
                     >
-                        <span>Login Admin</span>
+                        Login Admin
                     </Link>
                 {/if}
+
+                <!-- Mobile Hamburger Toggle -->
+                <button
+                    type="button"
+                    class="rounded-lg p-2 text-slate-600 hover:bg-white md:hidden dark:text-slate-300 dark:hover:bg-slate-800"
+                    onclick={() => (mobileMenuOpen = !mobileMenuOpen)}
+                    aria-label="Buka Menu"
+                >
+                    {#if mobileMenuOpen}
+                        <X class="h-5 w-5" />
+                    {:else}
+                        <MenuIcon class="h-5 w-5" />
+                    {/if}
+                </button>
             </div>
         </div>
-    </header>
 
-    <!-- HERO SECTION -->
-    <section class="relative z-10 overflow-hidden pt-16 pb-24 lg:pt-24 lg:pb-32">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
-                <!-- Hero Left Info -->
-                <div class="text-center lg:col-span-7 lg:text-left">
-                    <div
-                        class="inline-flex items-center gap-2 rounded-full border border-indigo-500/40 bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20 px-4 py-1.5 text-xs font-extrabold text-indigo-700 shadow-[0_0_20px_rgba(99,102,241,0.25)] backdrop-blur-md dark:text-indigo-300"
+        <!-- Mobile Drawer Menu -->
+        {#if mobileMenuOpen}
+            <div class="border-b border-slate-200 bg-[#FAF8F5] px-4 py-4 md:hidden dark:border-slate-800 dark:bg-[#0E0D15]">
+                <nav class="flex flex-col space-y-3 text-sm font-medium">
+                    <a
+                        href="#modul"
+                        class="py-1 text-slate-700 dark:text-slate-200"
+                        onclick={() => (mobileMenuOpen = false)}
                     >
-                        <Rocket class="h-3.5 w-3.5 animate-bounce text-indigo-500" />
-                        <span>Partner Software & Sistem Informasi Terpercaya</span>
-                    </div>
-
-                    <h1
-                        class="mt-6 text-4xl leading-[1.15] font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl dark:text-white"
+                        Apps
+                    </a>
+                    <a
+                        href="#keunggulan"
+                        class="py-1 text-slate-700 dark:text-slate-200"
+                        onclick={() => (mobileMenuOpen = false)}
                     >
-                        Sistem Informasi & <span
-                            class="bg-gradient-to-r from-indigo-600 via-pink-500 via-purple-600 to-emerald-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-pink-400 dark:via-purple-300 dark:to-emerald-400"
-                            >Software Custom</span
-                        > Skala Enterprise
-                    </h1>
-
-                    <p
-                        class="mx-auto mt-6 max-w-2xl text-lg leading-relaxed font-medium text-slate-700 lg:mx-0 dark:text-slate-300"
+                        Keunggulan
+                    </a>
+                    <a
+                        href="#faq"
+                        class="py-1 text-slate-700 dark:text-slate-200"
+                        onclick={() => (mobileMenuOpen = false)}
                     >
-                        <strong class="font-bold text-slate-900 dark:text-white">Purwotama Satria</strong> membantu perusahaan,
-                        instansi, dan bisnis berkembang merancang sistem web, mobile apps, ERP/CRM, LMS, CBT, POS Kasir, hingga
-                        SIMRS yang cepat, aman, dan tanpa lisensi rutin.
-                    </p>
+                        Tanya Jawab
+                    </a>
+                    <a
+                        href="#kontak"
+                        class="py-1 text-slate-700 dark:text-slate-200"
+                        onclick={() => (mobileMenuOpen = false)}
+                    >
+                        Kontak Developer
+                    </a>
 
-                    <!-- Contact Pills -->
-                    <div class="mt-8 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+                    <div class="flex flex-col gap-2 pt-3 border-t border-slate-200 dark:border-slate-800">
                         <a
                             href={fairuzWa}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-6 py-3.5 text-sm font-black text-slate-950 shadow-xl shadow-emerald-500/35 transition-all duration-300 hover:scale-105 active:scale-95"
+                            class="flex items-center justify-center gap-2 rounded-lg bg-emerald-600 py-2.5 text-xs font-semibold text-white shadow-xs"
                         >
-                            <MessageSquare class="h-5 w-5 fill-slate-950 text-emerald-500" />
-                            <div class="text-left">
-                                <div class="text-xs font-bold tracking-wider uppercase opacity-80">
-                                    Konsultasi Teknis
-                                </div>
-                                <div class="text-sm font-black">Fairuz (Chief Developer)</div>
-                            </div>
+                            <MessageSquare class="h-4 w-4" />
+                            <span>Konsultasi WhatsApp (Fairuz)</span>
                         </a>
-
-                        <a
-                            href={afifWa}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="inline-flex items-center gap-3 rounded-2xl border border-indigo-500/40 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-6 py-3.5 text-sm font-black text-white shadow-xl shadow-purple-500/30 transition-all duration-300 hover:scale-105 active:scale-95"
+                        <Link
+                            href="/login"
+                            class="flex items-center justify-center rounded-lg border border-slate-300 py-2 text-xs font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300"
                         >
-                            <User class="h-5 w-5 text-indigo-200" />
-                            <div class="text-left">
-                                <div class="text-xs font-bold tracking-wider text-indigo-200 uppercase">
-                                    Kerjasama & Business
-                                </div>
-                                <div class="text-sm font-black text-white">Afif (Owner)</div>
-                            </div>
-                        </a>
+                            Login Admin
+                        </Link>
                     </div>
-
-                    <!-- Trust Checklist -->
-                    <div
-                        class="mt-10 grid grid-cols-2 gap-4 border-t border-slate-200 pt-6 text-xs font-bold text-slate-700 sm:grid-cols-3 dark:border-slate-800/80 dark:text-slate-300"
-                    >
-                        <div class="flex items-center gap-2">
-                            <CheckCircle2 class="h-4 w-4 flex-shrink-0 text-emerald-500" />
-                            <span>Source Code 100% Hak Milik</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <CheckCircle2 class="h-4 w-4 flex-shrink-0 text-emerald-500" />
-                            <span>Arsitektur Svelte 5 + Laravel</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <CheckCircle2 class="h-4 w-4 flex-shrink-0 text-emerald-500" />
-                            <span>Garansi Support & Maintenance</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Hero Right Interactive Card with Vibrant Border & Neon Shadow -->
-                <div class="lg:col-span-5">
-                    <div
-                        class="relative rounded-3xl border border-indigo-500/40 bg-white/95 p-6 shadow-[0_0_40px_rgba(99,102,241,0.25)] backdrop-blur-xl dark:bg-slate-900/95"
-                    >
-                        <div
-                            class="mb-4 flex items-center justify-between border-b border-slate-200 pb-4 dark:border-slate-800"
-                        >
-                            <div class="flex items-center gap-2">
-                                <div class="h-3 w-3 rounded-full bg-rose-500"></div>
-                                <div class="h-3 w-3 rounded-full bg-amber-500"></div>
-                                <div class="h-3 w-3 rounded-full bg-emerald-500"></div>
-                                <span class="ml-2 font-mono text-xs font-bold text-slate-500 dark:text-slate-400"
-                                    >purwotama-satria-stack.ts</span
-                                >
-                            </div>
-                            <span
-                                class="rounded-full border border-emerald-500/40 bg-emerald-500/20 px-2.5 py-0.5 font-mono text-[10px] font-extrabold text-emerald-600 dark:text-emerald-300"
-                                >100% Verified</span
-                            >
-                        </div>
-
-                        <div class="space-y-2 font-mono text-xs leading-relaxed text-slate-800 dark:text-slate-300">
-                            <p class="font-bold text-purple-600 dark:text-purple-400">
-                                <span class="text-blue-600 dark:text-blue-400">import</span> &#123; PurwotamaEngine
-                                &#125; <span class="text-blue-600 dark:text-blue-400">from</span>
-                                <span class="text-emerald-600 dark:text-emerald-300">'@purwotama/studio'</span>;
-                            </p>
-                            <p class="text-slate-400 dark:text-slate-500">
-                                // Initialize Professional Custom Software Solution
-                            </p>
-                            <p class="text-blue-600 dark:text-blue-400">
-                                const <span class="text-amber-600 dark:text-amber-300">clientProject</span> =
-                                <span class="text-blue-600 dark:text-blue-400">await</span> PurwotamaEngine.build(&#123;
-                            </p>
-                            <p class="pl-4 text-slate-700 dark:text-slate-300">
-                                architect: <span class="text-emerald-600 dark:text-emerald-300">'Fairuz & Afif'</span>,
-                            </p>
-                            <p class="pl-4 text-slate-700 dark:text-slate-300">
-                                speed: <span class="text-emerald-600 dark:text-emerald-300"
-                                    >'Ultra High Performance (0.02s)'</span
-                                >,
-                            </p>
-                            <p class="pl-4 text-slate-700 dark:text-slate-300">
-                                security: <span class="text-emerald-600 dark:text-emerald-300"
-                                    >'Spatie RBAC + Encrypted API'</span
-                                >,
-                            </p>
-                            <p class="pl-4 text-slate-700 dark:text-slate-300">
-                                ownership: <span class="font-black text-emerald-600 dark:text-emerald-300"
-                                    >'100% Full Source Code Transfer'</span
-                                >
-                            </p>
-                            <p class="text-blue-600 dark:text-blue-400">&#125;);</p>
-                            <p class="mt-3 font-black text-emerald-600 dark:text-emerald-400">
-                                ✓ System ready for deployment & scale!
-                            </p>
-                        </div>
-
-                        <!-- Highlights Grid -->
-                        <div class="mt-6 grid grid-cols-2 gap-3 border-t border-slate-200 pt-4 dark:border-slate-800">
-                            <div
-                                class="rounded-2xl border border-indigo-500/20 bg-indigo-500/10 p-3.5 dark:bg-slate-950/80"
-                            >
-                                <div class="text-lg font-black text-indigo-600 dark:text-indigo-400">
-                                    Laravel + Svelte 5
-                                </div>
-                                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                                    Tech Stack Modern
-                                </div>
-                            </div>
-                            <div
-                                class="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-3.5 dark:bg-slate-950/80"
-                            >
-                                <div class="text-lg font-black text-emerald-600 dark:text-emerald-400">
-                                    Zero Licensing
-                                </div>
-                                <div class="text-[11px] font-bold text-slate-500 dark:text-slate-400">
-                                    Bebas Biaya Rutin
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </nav>
             </div>
-        </div>
-    </section>
+        {/if}
+    </header>
 
-    <!-- STATS COUNTER BAR -->
-    <section
-        class="relative z-10 border-y border-slate-200 bg-white/80 py-10 backdrop-blur-md dark:border-slate-800/80 dark:bg-slate-900/80"
-    >
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 gap-8 text-center md:grid-cols-4">
-                {#each stats as stat}
-                    <div>
-                        <div
-                            class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-3xl font-black text-transparent sm:text-4xl dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400"
-                        >
-                            {stat.value}
-                        </div>
-                        <div class="mt-1 text-xs font-bold text-slate-700 sm:text-sm dark:text-slate-300">
-                            {stat.label}
-                        </div>
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </section>
-
-    <!-- WHY CHOOSE US / VALUE PROPOSITIONS -->
-    <section id="why-us" class="relative z-10 bg-slate-50 py-24 dark:bg-slate-950">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <div
-                    class="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-4 py-1.5 text-xs font-black text-emerald-700 dark:text-emerald-400"
-                >
-                    <Award class="h-4 w-4" /> Jaminan Kualitas Software
-                </div>
-                <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-                    Mengapa Klien Percaya Pada <span
-                        class="bg-gradient-to-r from-emerald-600 via-cyan-500 via-teal-500 to-indigo-600 bg-clip-text text-transparent dark:from-emerald-400 dark:via-teal-300 dark:to-cyan-400"
-                        >Purwotama Satria</span
-                    >?
-                </h2>
-                <p class="mt-4 text-base font-medium text-slate-600 dark:text-slate-400">
-                    Kami tidak hanya membuat software yang berjalan, tetapi merancang aset teknologi berjangka panjang
-                    yang memberikan dampak nyata bagi efisiensi bisnis Anda.
-                </p>
-            </div>
-
-            <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <!-- 1. Pengembangan Cepat & Terukur -->
-                <div
-                    class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/50 dark:border-slate-800 dark:bg-slate-900/70 dark:shadow-none"
-                >
-                    <div
-                        class="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500"
-                    ></div>
-                    <div class="mb-6 flex items-center justify-between">
-                        <div
-                            class="flex h-14 w-14 items-center justify-center rounded-2xl border border-emerald-500/30 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-                        >
-                            <Rocket class="h-7 w-7" />
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white">Pengembangan Cepat & Terukur</h3>
-                    <p class="mt-3 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                        Kami menerapkan proses pengembangan yang terstruktur, mulai dari analisis kebutuhan,
-                        perancangan, hingga implementasi. Hasilnya, proyek selesai tepat waktu dengan kualitas yang
-                        tetap terjaga.
-                    </p>
-                </div>
-
-                <!-- 2. UI/UX Modern & Responsif -->
-                <div
-                    class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/50 dark:border-slate-800 dark:bg-slate-900/70 dark:shadow-none"
-                >
-                    <div
-                        class="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
-                    ></div>
-                    <div class="mb-6 flex items-center justify-between">
-                        <div
-                            class="flex h-14 w-14 items-center justify-center rounded-2xl border border-indigo-500/30 bg-indigo-500/15 text-indigo-600 dark:text-indigo-400"
-                        >
-                            <Laptop class="h-7 w-7" />
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white">UI/UX Modern & Responsif</h3>
-                    <p class="mt-3 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                        Setiap aplikasi dirancang dengan antarmuka yang intuitif, mudah digunakan, dan responsif di
-                        berbagai perangkat untuk memberikan pengalaman terbaik bagi pengguna.
-                    </p>
-                </div>
-
-                <!-- 3. Keamanan & Skalabilitas -->
-                <div
-                    class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-amber-500/50 dark:border-slate-800 dark:bg-slate-900/70 dark:shadow-none"
-                >
-                    <div
-                        class="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-amber-500 via-orange-500 to-rose-500"
-                    ></div>
-                    <div class="mb-6 flex items-center justify-between">
-                        <div
-                            class="flex h-14 w-14 items-center justify-center rounded-2xl border border-amber-500/30 bg-amber-500/15 text-amber-600 dark:text-amber-400"
-                        >
-                            <ShieldCheck class="h-7 w-7" />
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white">Keamanan & Skalabilitas</h3>
-                    <p class="mt-3 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                        Aplikasi dibangun dengan standar keamanan yang baik dan arsitektur yang fleksibel, sehingga siap
-                        berkembang mengikuti kebutuhan bisnis Anda di masa depan.
-                    </p>
-                </div>
-
-                <!-- 4. Maintenance & Dukungan Berkelanjutan -->
-                <div
-                    class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-rose-500/50 dark:border-slate-800 dark:bg-slate-900/70 dark:shadow-none"
-                >
-                    <div
-                        class="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-rose-500 via-pink-500 to-purple-500"
-                    ></div>
-                    <div class="mb-6 flex items-center justify-between">
-                        <div
-                            class="flex h-14 w-14 items-center justify-center rounded-2xl border border-rose-500/30 bg-rose-500/15 text-rose-600 dark:text-rose-400"
-                        >
-                            <Clock3 class="h-7 w-7" />
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white">
-                        Maintenance & Dukungan Berkelanjutan
-                    </h3>
-                    <p class="mt-3 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                        Kami menyediakan layanan pemeliharaan, perbaikan, dan pengembangan lanjutan agar sistem tetap
-                        stabil, aman, dan selalu relevan dengan kebutuhan bisnis Anda.
-                    </p>
-                </div>
-
-                <!-- 5. Arsitektur Siap Berkembang -->
-                <div
-                    class="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-cyan-500/50 md:col-span-2 lg:col-span-1 dark:border-slate-800 dark:bg-slate-900/70 dark:shadow-none"
-                >
-                    <div
-                        class="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500"
-                    ></div>
-                    <div class="mb-6 flex items-center justify-between">
-                        <div
-                            class="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-500/30 bg-cyan-500/15 text-cyan-600 dark:text-cyan-400"
-                        >
-                            <TrendingUp class="h-7 w-7" />
-                        </div>
-                    </div>
-                    <h3 class="text-xl font-black text-slate-900 dark:text-white">Arsitektur Siap Berkembang</h3>
-                    <p class="mt-3 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                        Kami merancang sistem dengan arsitektur modular yang mudah dipelihara, dikembangkan, dan
-                        diintegrasikan dengan kebutuhan baru seiring pertumbuhan bisnis Anda.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- INTERACTIVE PROJECT ESTIMATOR WIDGET (CONVERSION BOOSTER) -->
-    <section
-        id="estimator"
-        class="relative z-10 border-y border-slate-200 bg-gradient-to-b from-indigo-50/50 via-slate-50 to-white py-24 dark:border-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
-    >
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <div
-                    class="inline-flex items-center gap-2 rounded-full border border-indigo-500/40 bg-indigo-500/15 px-4 py-1.5 text-xs font-black text-indigo-700 dark:text-indigo-300"
-                >
-                    <Calculator class="h-4 w-4" /> Interactive Cost Estimator
-                </div>
-                <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-                    Simulasi Estimasi Proyek <span
-                        class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-300 dark:to-pink-400"
-                        >Software Anda</span
-                    >
-                </h2>
-                <p class="mt-4 text-base font-medium text-slate-600 dark:text-slate-400">
-                    Pilih spesifikasi sistem yang Anda butuhkan di bawah ini untuk mendapatkan gambaran perkiraan ruang
-                    lingkup dan penawaran resmi.
-                </p>
-            </div>
-
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden border-b border-slate-200/80 bg-[#FAF8F5] py-16 sm:py-20 lg:py-24 dark:border-slate-800/80 dark:bg-[#0E0D15]">
+        <!-- ABSTRACT VECTOR BACKGROUND -->
+        <div class="pointer-events-none absolute inset-0 z-0 overflow-hidden select-none">
+            <!-- Subtle Dot Matrix Pattern -->
             <div
-                class="mx-auto mt-12 max-w-4xl rounded-3xl border border-indigo-500/40 bg-white p-6 shadow-2xl backdrop-blur-xl sm:p-10 dark:bg-slate-900/95"
-            >
-                <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    <!-- Option 1: Project Type -->
-                    <div>
-                        <label
-                            for="project-type-select"
-                            class="mb-2 block text-xs font-black tracking-wider text-indigo-600 uppercase dark:text-indigo-400"
-                            >1. Jenis Sistem / Software</label
-                        >
-                        <select
-                            id="project-type-select"
-                            bind:value={selectedProjectType}
-                            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-white"
-                        >
-                            <option value="Web App & System ERP">Custom Web App / ERP</option>
-                            <option value="EdTech LMS & CBT Engine">LMS & CBT Engine Ujian</option>
-                            <option value="Sistem Kasir & Multi-Branch POS">Sistem Kasir & POS Multi-Cabang</option>
-                            <option value="SIMRS / Logistics Fleet ERP">SIMRS Rumah Sakit / Logistics Fleet</option>
-                            <option value="Mobile App (Android & iOS)">Mobile App (Android & iOS)</option>
-                        </select>
+                class="absolute inset-0 opacity-[0.20] dark:opacity-[0.10]"
+                style="background-image: radial-gradient(#714B67 0.8px, transparent 0.8px); background-size: 24px 24px;"
+            ></div>
+
+            <!-- Soft Pastel Organic Shapes (Plum, Teal & Peach Warmth) -->
+            <div class="absolute -top-24 -left-24 h-96 w-96 rounded-full bg-[#714B67]/10 blur-3xl dark:bg-[#714B67]/15"></div>
+            <div class="absolute top-1/4 -right-20 h-96 w-96 rounded-full bg-[#017E84]/10 blur-3xl dark:bg-[#017E84]/15"></div>
+            <div class="absolute -bottom-20 left-1/3 h-80 w-80 rounded-full bg-[#E58A3C]/10 blur-3xl dark:bg-[#E58A3C]/10"></div>
+
+            <!-- Architectural Geometric SVG Curved Lines -->
+            <svg class="absolute top-0 right-0 h-full w-full opacity-[0.25] dark:opacity-[0.12]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 600" fill="none" preserveAspectRatio="none">
+                <path d="M-100 200 C300 100, 600 450, 1500 150" stroke="#714B67" stroke-width="1.5" stroke-dasharray="4 6"/>
+                <path d="M-50 350 C400 250, 800 550, 1600 300" stroke="#017E84" stroke-width="1.5"/>
+                <path d="M200 -50 C600 300, 1100 100, 1500 400" stroke="#E58A3C" stroke-width="1" stroke-dasharray="2 4"/>
+                <circle cx="1180" cy="180" r="140" stroke="#714B67" stroke-width="1" stroke-dasharray="3 3"/>
+                <circle cx="1180" cy="180" r="80" stroke="#017E84" stroke-width="0.75"/>
+            </svg>
+        </div>
+
+        <div class="relative z-10 mx-auto max-w-5xl px-4 text-center sm:px-6">
+            <!-- Badge -->
+            <div class="inline-flex items-center gap-2 rounded-full border border-[#714B67]/20 bg-[#714B67]/10 px-3.5 py-1 text-xs font-semibold text-[#714B67] dark:border-[#714B67]/40 dark:bg-[#714B67]/25 dark:text-[#E8D6E3]">
+                <Layers class="h-3.5 w-3.5" />
+                <span>Software & Sistem Informasi Bisnis</span>
+            </div>
+
+            <!-- Headline -->
+            <h1 class="mt-6 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl lg:text-5xl dark:text-white">
+                Sistem Operasional Bisnis yang Rapi, Cepat, dan <span class="text-[#714B67] dark:text-[#E2C3DB]">Milik Anda Seutuhnya</span>
+            </h1>
+
+            <!-- Subtitle -->
+            <p class="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-600 sm:text-lg dark:text-slate-300">
+                Solusi software terintegrasi untuk kasir, stok gudang, akuntansi, dan alur kerja operasional bisnis Anda.
+            </p>
+
+            <!-- Hero Action Buttons -->
+            <div class="mt-8 flex flex-wrap items-center justify-center gap-3">
+                <a
+                    href={fairuzWa}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 rounded-xl bg-[#714B67] px-6 py-3 text-sm font-semibold text-white shadow-xs shadow-[#714B67]/25 transition-all hover:bg-[#5C3C54] active:scale-95"
+                >
+                    <MessageSquare class="h-4 w-4" />
+                    <span>Konsultasi Proyek (Gratis)</span>
+                </a>
+                <a
+                    href="#modul"
+                    class="inline-flex items-center gap-2 rounded-xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-700 shadow-xs transition-all hover:bg-white dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700/80"
+                >
+                    <span>Lihat Pilihan Apps</span>
+                    <ChevronDown class="h-4 w-4" />
+                </a>
+            </div>
+
+            <!-- Key Trust Badges -->
+            <div class="mt-12 flex flex-wrap items-center justify-center gap-6 border-t border-slate-200/80 pt-6 text-xs font-medium text-slate-600 sm:gap-10 dark:border-slate-800/80 dark:text-slate-400">
+                <div class="flex items-center gap-2">
+                    <CheckCircle2 class="h-4 w-4 text-[#017E84] dark:text-[#64D2D7]" />
+                    <span>100% Hak Milik</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <CheckCircle2 class="h-4 w-4 text-[#017E84] dark:text-[#64D2D7]" />
+                    <span>Lisensi Permanen</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <CheckCircle2 class="h-4 w-4 text-[#017E84] dark:text-[#64D2D7]" />
+                    <span>Kustom Sesuai Kebutuhan</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <CheckCircle2 class="h-4 w-4 text-[#017E84] dark:text-[#64D2D7]" />
+                    <span>Garansi & Dukungan Teknis</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- METRICS SECTION (RINGKAS & PROFESIONAL) -->
+    <section class="border-b border-slate-200/80 bg-white/70 py-10 dark:border-slate-800 dark:bg-slate-900/30">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6">
+            <div class="grid grid-cols-2 gap-6 sm:grid-cols-4 text-center">
+                <div class="rounded-xl border border-slate-200/70 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                    <div class="text-2xl font-black text-slate-900 sm:text-3xl dark:text-white">50+</div>
+                    <div class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">Sistem & Modul Terpasang</div>
+                </div>
+                <div class="rounded-xl border border-slate-200/70 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                    <div class="text-2xl font-black text-slate-900 sm:text-3xl dark:text-white">100%</div>
+                    <div class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">Kepemilikan Hak Cipta</div>
+                </div>
+                <div class="rounded-xl border border-slate-200/70 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                    <div class="text-2xl font-black text-[#714B67] sm:text-3xl dark:text-[#E2C3DB]">Terpadu</div>
+                    <div class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">1 Ekosistem Database</div>
+                </div>
+                <div class="rounded-xl border border-slate-200/70 bg-white p-4 shadow-xs dark:border-slate-800 dark:bg-slate-900">
+                    <div class="text-2xl font-black text-[#017E84] sm:text-3xl dark:text-[#64D2D7]">Langsung</div>
+                    <div class="mt-1 text-xs font-medium text-slate-500 dark:text-slate-400">Dukungan Tim Pengembang</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- APPS SECTION -->
+    <section id="modul" class="py-16 sm:py-20">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+            <!-- Header Section -->
+            <div class="max-w-2xl">
+                <h2 class="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-white">
+                    Pilihan Apps
+                </h2>
+                <p class="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                    Pilih aplikasi untuk melihat fitur dan manfaat operasionalnya.
+                </p>
+            </div>
+
+            <!-- APP ICONS GRID -->
+                <div class="mt-8 rounded-2xl border border-slate-200 bg-white p-5 sm:p-8 shadow-xs dark:border-slate-800 dark:bg-slate-900/70">
+                    <!-- App Squircle Grid: 3 cols on mobile, 6 cols on sm, md, lg -->
+                    <div class="grid grid-cols-3 gap-3.5 sm:grid-cols-6 sm:gap-4 md:grid-cols-6 lg:grid-cols-6">
+                        {#each modules as mod}
+                            <button
+                                type="button"
+                                class="group flex flex-col items-center text-center transition-all focus:outline-none"
+                                onclick={() => (selectedModuleId = mod.id)}
+                            >
+                                <!-- Icon Container -->
+                                <div
+                                    class={`relative flex h-13 w-13 sm:h-16 sm:w-16 items-center justify-center rounded-2xl sm:rounded-3xl transition-all duration-200 ${mod.color} ${
+                                        selectedModuleId === mod.id
+                                            ? 'scale-105 shadow-md shadow-[#714B67]/20 ring-4 ring-[#714B67]/30 ring-offset-2 dark:ring-offset-slate-900'
+                                            : 'opacity-85 hover:scale-105 hover:opacity-100 hover:shadow-xs'
+                                    }`}
+                                >
+                                    <mod.icon class="h-6 w-6 sm:h-7 sm:w-7 text-white" />
+                                </div>
+
+                                <!-- App Title Label -->
+                                <span
+                                    class={`mt-2 block w-full truncate text-[10px] sm:text-xs font-semibold ${
+                                        selectedModuleId === mod.id
+                                            ? 'text-[#714B67] dark:text-[#E2C3DB] font-bold'
+                                            : 'text-slate-600 dark:text-slate-400 group-hover:text-slate-900 dark:group-hover:text-slate-200'
+                                    }`}
+                                >
+                                    {mod.shortName}
+                                </span>
+
+                                <!-- Active Dot Indicator -->
+                                {#if selectedModuleId === mod.id}
+                                    <span class="mt-1 h-1 w-1 rounded-full bg-[#714B67] dark:bg-[#E2C3DB]"></span>
+                                {/if}
+                            </button>
+                        {/each}
                     </div>
 
-                    <!-- Option 2: Platform -->
-                    <div>
-                        <label
-                            for="platform-type-select"
-                            class="mb-2 block text-xs font-black tracking-wider text-indigo-600 uppercase dark:text-indigo-400"
-                            >2. Target Platform</label
-                        >
-                        <select
-                            id="platform-type-select"
-                            bind:value={selectedPlatform}
-                            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-white"
-                        >
-                            <option value="Web Dashboard & REST API">Web Dashboard & REST API</option>
-                            <option value="Full Cross-Platform (Web + Mobile)"
-                                >Full Cross-Platform (Web + Mobile)</option
-                            >
-                            <option value="Desktop Hybrid & Cloud Server">Desktop Hybrid & Cloud Server</option>
-                        </select>
-                    </div>
+                    <!-- SELECTED MODULE DETAIL CARD (SKELETON UI CLEAN SURFACE) -->
+                    <div class="mt-8 rounded-2xl border border-slate-200 bg-slate-50/70 p-6 sm:p-8 dark:border-slate-800 dark:bg-slate-950/60 transition-all">
+                        <div class="flex flex-col gap-6 lg:flex-row lg:items-start lg:justify-between">
+                            <!-- Left: Icon & Description -->
+                            <div class="flex-1">
+                                <div class="flex items-center gap-4">
+                                    <div class={`flex h-14 w-14 sm:h-16 sm:w-16 flex-shrink-0 items-center justify-center rounded-2xl sm:rounded-3xl ${selectedModule.color} shadow-xs`}>
+                                        <selectedModule.icon class="h-7 w-7 sm:h-8 sm:w-8 text-white" />
+                                    </div>
+                                    <div>
+                                        <div class="flex flex-wrap items-center gap-2">
+                                            <h3 class="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                                                {selectedModule.name}
+                                            </h3>
+                                            <span class="rounded-full border border-slate-200 bg-white px-2.5 py-0.5 text-[11px] font-semibold text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+                                                {selectedModule.badge}
+                                            </span>
+                                        </div>
+                                        <p class="mt-0.5 text-xs sm:text-sm font-medium text-slate-500 dark:text-slate-400">
+                                            {selectedModule.tagline}
+                                        </p>
+                                    </div>
+                                </div>
 
-                    <!-- Option 3: Complexity -->
-                    <div>
-                        <label
-                            for="complexity-select"
-                            class="mb-2 block text-xs font-black tracking-wider text-indigo-600 uppercase dark:text-indigo-400"
-                            >3. Skala & Fitur Kustom</label
-                        >
-                        <select
-                            id="complexity-select"
-                            bind:value={selectedComplexity}
-                            class="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm font-bold text-slate-900 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 focus:outline-none dark:border-slate-700 dark:bg-slate-950 dark:text-white"
-                        >
-                            <option value="Standar (Manajemen Data & User)">Standar (Manajemen Data & User)</option>
-                            <option value="Menengah (Multi-User & Reporting)">Menengah (Multi-User & Reporting)</option>
-                            <option value="Kompleks (Multi-Branch, Custom API & Security)"
-                                >Kompleks (Multi-Branch & API)</option
-                            >
-                            <option value="Enterprise High Scalability">Enterprise High Scalability</option>
-                        </select>
+                                <p class="mt-4 text-xs sm:text-sm leading-relaxed text-slate-600 dark:text-slate-300 max-w-2xl">
+                                    {selectedModule.desc}
+                                </p>
+                            </div>
+
+                            <!-- Right: Quick CTA Button -->
+                            <div class="flex-shrink-0">
+                                <a
+                                    href={selectedModule.waUrl}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#714B67] px-5 py-3 text-xs font-semibold text-white shadow-xs transition-all hover:bg-[#5C3C54] active:scale-95"
+                                >
+                                    <MessageSquare class="h-4 w-4" />
+                                    <span>Konsultasi Modul Ini</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Benefits Checklist -->
+                        <div class="mt-6 border-t border-slate-200/80 pt-6 dark:border-slate-800/80">
+                            <h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider mb-3">
+                                Fitur Utama:
+                            </h4>
+                            <div class="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                                {#each selectedModule.features as feat}
+                                    <div class="flex items-start gap-2 text-xs font-medium text-slate-700 dark:text-slate-300">
+                                        <CheckCircle2 class="h-4 w-4 flex-shrink-0 text-[#017E84] dark:text-[#64D2D7] mt-0.5" />
+                                        <span>{feat}</span>
+                                    </div>
+                                {/each}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Estimator Result Card -->
-                <div
-                    class="mt-8 flex flex-col items-center justify-between gap-6 border-t border-slate-200 pt-6 sm:flex-row dark:border-slate-800"
-                >
+            <!-- Custom Module Request Banner -->
+            <div class="mt-10 rounded-2xl border border-[#714B67]/15 bg-[#714B67]/8 p-5 sm:p-6 dark:border-[#714B67]/30 dark:bg-[#714B67]/15">
+                <div class="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
                     <div>
-                        <div class="text-xs font-bold text-slate-500 dark:text-slate-400">Perkiraan Mulai Dari:</div>
-                        <div class="mt-1 text-3xl font-black tracking-tight text-emerald-600 dark:text-emerald-400">
-                            {estimatedBudget}
-                        </div>
-                        <div class="mt-1 text-[11px] font-medium text-slate-500 dark:text-slate-400">
-                            *Termasuk Source Code, Setup Server, & Garansi Support
-                        </div>
+                        <h4 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white">
+                            Butuh Modul Khusus?
+                        </h4>
+                        <p class="mt-0.5 text-xs text-slate-600 dark:text-slate-300">
+                            Kami siap merancang fitur dari nol sesuai alur kerja spesifik kantor atau usaha Anda.
+                        </p>
                     </div>
-
                     <a
-                        href={estimatorWaUrl}
+                        href={fairuzWa}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-8 py-4 text-sm font-black text-slate-950 shadow-xl shadow-emerald-500/35 transition-all hover:scale-105 active:scale-95 sm:w-auto"
+                        class="inline-flex flex-shrink-0 items-center gap-2 rounded-xl bg-[#714B67] px-4 py-2 text-xs font-semibold text-white shadow-xs hover:bg-[#5C3C54]"
                     >
-                        <MessageSquare class="h-5 w-5 fill-slate-950 text-emerald-500" />
-                        <span>Kirim Estimasi Ini ke WhatsApp</span>
+                        <span>Konsultasi Kustom</span>
+                        <ArrowUpRight class="h-4 w-4" />
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- FEATURED PORTFOLIO SHOWCASE WITH EXPANDED DUMMY PROJECTS & TABS -->
-    <section id="portfolio" class="relative z-10 py-24">
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <div
-                    class="inline-flex items-center gap-2 rounded-full border border-indigo-500/40 bg-indigo-500/15 px-4 py-1.5 text-xs font-black text-indigo-700 dark:text-indigo-300"
-                >
-                    <Briefcase class="h-4 w-4" /> Real & Showcase Work (11 Projects)
-                </div>
-                <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-                    Katalog Portofolio Sistem <span
-                        class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent dark:from-indigo-400 dark:via-purple-300 dark:to-blue-400"
-                        >Purwotama Satria</span
-                    >
+    <!-- KEUNGGULAN SECTION -->
+    <section id="keunggulan" class="border-y border-slate-200/80 bg-white/70 py-16 sm:py-20 dark:border-slate-800 dark:bg-slate-900/40">
+        <div class="mx-auto max-w-5xl px-4 sm:px-6">
+            <div class="text-center">
+                <span class="text-xs font-bold text-[#714B67] uppercase dark:text-[#E2C3DB]">Komitmen Kami</span>
+                <h2 class="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-white">
+                    Mengapa Memilih Purwotama Satria?
                 </h2>
-                <p class="mt-4 text-base font-medium text-slate-600 dark:text-slate-400">
-                    Jelajahi portofolio sistem informasi, web aplikasi, dan engine kustom yang telah kami rancang untuk
-                    berbagai industri.
-                </p>
-
-                <!-- Filter Tabs -->
-                <div class="mt-8 flex flex-wrap items-center justify-center gap-2">
-                    <button
-                        onclick={() => (activePortfolioTab = 'all')}
-                        class={`rounded-xl px-4 py-2 text-xs font-black transition-all ${activePortfolioTab === 'all' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/35' : 'border border-slate-200 bg-white text-slate-700 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'}`}
-                    >
-                        Semua ({portfolios.length})
-                    </button>
-                    <button
-                        onclick={() => (activePortfolioTab = 'education')}
-                        class={`rounded-xl px-4 py-2 text-xs font-black transition-all ${activePortfolioTab === 'education' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/35' : 'border border-slate-200 bg-white text-slate-700 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'}`}
-                    >
-                        LMS & CBT Edukasi
-                    </button>
-                    <button
-                        onclick={() => (activePortfolioTab = 'enterprise')}
-                        class={`rounded-xl px-4 py-2 text-xs font-black transition-all ${activePortfolioTab === 'enterprise' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/35' : 'border border-slate-200 bg-white text-slate-700 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'}`}
-                    >
-                        Government & ERP
-                    </button>
-                    <button
-                        onclick={() => (activePortfolioTab = 'health')}
-                        class={`rounded-xl px-4 py-2 text-xs font-black transition-all ${activePortfolioTab === 'health' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/35' : 'border border-slate-200 bg-white text-slate-700 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'}`}
-                    >
-                        SIMRS & Kesehatan
-                    </button>
-                    <button
-                        onclick={() => (activePortfolioTab = 'pos')}
-                        class={`rounded-xl px-4 py-2 text-xs font-black transition-all ${activePortfolioTab === 'pos' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/35' : 'border border-slate-200 bg-white text-slate-700 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'}`}
-                    >
-                        Kasir & POS
-                    </button>
-                    <button
-                        onclick={() => (activePortfolioTab = 'corporate')}
-                        class={`rounded-xl px-4 py-2 text-xs font-black transition-all ${activePortfolioTab === 'corporate' ? 'bg-indigo-600 text-white shadow-lg shadow-indigo-600/35' : 'border border-slate-200 bg-white text-slate-700 hover:text-indigo-600 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-400'}`}
-                    >
-                        Corporate Portal
-                    </button>
-                </div>
-            </div>
-
-            <!-- Portfolio Cards Grid -->
-            <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {#each filteredPortfolios as item}
-                    <div
-                        class="group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 transition-all duration-300 hover:-translate-y-1 hover:border-indigo-500/50 hover:shadow-2xl hover:shadow-indigo-500/15 dark:border-slate-800 dark:bg-slate-900/80 dark:shadow-none"
-                    >
-                        <div class={`h-1.5 w-full bg-gradient-to-r ${item.gradient} absolute top-0 left-0`}></div>
-                        <div>
-                            <!-- Header Icon & Badge -->
-                            <div class="mt-2 flex items-center justify-between">
-                                <div
-                                    class={`h-12 w-12 rounded-2xl bg-gradient-to-tr ${item.gradient} p-2.5 text-white shadow-lg`}
-                                >
-                                    <item.icon class="h-full w-full" />
-                                </div>
-                                <span class={`rounded-full border px-3 py-1 text-[11px] font-extrabold ${item.bgGlow}`}>
-                                    {item.badge}
-                                </span>
-                            </div>
-
-                            <div class="mt-5">
-                                <div
-                                    class="text-xs font-black tracking-wider text-indigo-600 uppercase dark:text-indigo-400"
-                                >
-                                    {item.categoryLabel}
-                                </div>
-                                <h3
-                                    class="mt-1 text-xl font-black text-slate-900 transition-colors group-hover:text-indigo-600 dark:text-white dark:group-hover:text-indigo-300"
-                                >
-                                    {item.title}
-                                </h3>
-                                <p class="mt-3 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                                    {item.desc}
-                                </p>
-                            </div>
-
-                            <!-- Key Features Pills -->
-                            <div class="mt-5 space-y-2 border-t border-slate-200 pt-4 dark:border-slate-800/80">
-                                {#each item.features as feat}
-                                    <div
-                                        class="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300"
-                                    >
-                                        <Check class="h-3.5 w-3.5 flex-shrink-0 text-emerald-500" />
-                                        <span>{feat}</span>
-                                    </div>
-                                {/each}
-                            </div>
-                        </div>
-
-                        <div
-                            class="mt-6 flex items-center justify-between border-t border-slate-200 pt-4 dark:border-slate-800"
-                        >
-                            <span class="text-xs font-bold text-slate-500 dark:text-slate-400"
-                                >Purwotama Satria Built</span
-                            >
-                            <a
-                                href={fairuzWa}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-flex items-center gap-1 text-xs font-black text-indigo-600 hover:underline dark:text-indigo-400"
-                            >
-                                Tanyakan Sistem Ini <ArrowRight class="h-3.5 w-3.5" />
-                            </a>
-                        </div>
-                    </div>
-                {/each}
-            </div>
-        </div>
-    </section>
-
-    <!-- SERVICES SHOWCASE -->
-    <section
-        id="services"
-        class="relative z-10 border-y border-slate-200 bg-white py-24 dark:border-slate-800/80 dark:bg-slate-900/40"
-    >
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <div
-                    class="inline-flex items-center gap-2 rounded-full border border-indigo-500/40 bg-indigo-500/15 px-4 py-1.5 text-xs font-black text-indigo-700 dark:text-indigo-300"
-                >
-                    <Code2 class="h-4 w-4" /> Core Services
-                </div>
-                <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-                    Layanan Pengembangan Software <span
-                        class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 bg-clip-text text-transparent dark:from-indigo-400 dark:to-purple-300"
-                        >Profesional</span
-                    >
-                </h2>
-                <p class="mt-4 text-base font-medium text-slate-600 dark:text-slate-400">
-                    Kami merancang dan membangun setiap sistem secara modular, scalable, dan sesuai dengan kebutuhan
-                    unik alur bisnis Anda.
+                <p class="mx-auto mt-2 max-w-xl text-sm text-slate-600 dark:text-slate-400">
+                    Sistem yang dirancang awet, mudah digunakan, dan fleksibel mengikuti alur kerja Anda.
                 </p>
             </div>
 
-            <div class="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                {#each services as svc}
-                    <div
-                        class="rounded-3xl border border-slate-200 bg-slate-50 p-6 shadow-md shadow-slate-200/50 transition-all duration-300 hover:border-indigo-500/50 dark:border-slate-800 dark:bg-slate-950/90 dark:shadow-none"
-                    >
-                        <div class={`inline-flex rounded-2xl border p-3 ${svc.color}`}>
-                            <svc.icon class="h-6 w-6" />
+            <div class="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2">
+                {#each advantages as adv}
+                    <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xs transition-all hover:border-[#714B67]/30 dark:border-slate-800 dark:bg-slate-900/60 dark:hover:border-[#714B67]/40">
+                        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-[#714B67]/10 text-[#714B67] dark:bg-[#714B67]/25 dark:text-[#E2C3DB]">
+                            <adv.icon class="h-5 w-5" />
                         </div>
-                        <h3 class="mt-4 text-lg font-extrabold text-slate-900 dark:text-white">{svc.title}</h3>
-                        <p class="mt-2 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-400">
-                            {svc.desc}
+                        <h3 class="mt-4 text-base font-bold text-slate-900 dark:text-white">
+                            {adv.title}
+                        </h3>
+                        <p class="mt-2 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+                            {adv.desc}
                         </p>
                     </div>
                 {/each}
@@ -1156,46 +881,38 @@
         </div>
     </section>
 
-    <!-- FAQ ACCORDION SECTION -->
-    <section id="faq" class="relative z-10 bg-slate-50 py-24 dark:bg-slate-950">
-        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <div
-                    class="inline-flex items-center gap-2 rounded-full border border-purple-500/40 bg-purple-500/15 px-4 py-1.5 text-xs font-black text-purple-700 dark:text-purple-300"
-                >
-                    <HelpCircle class="h-4 w-4" /> FAQ & Pertanyaan Umum
-                </div>
-                <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-                    Pertanyaan Yang Sering <span
-                        class="bg-gradient-to-r from-purple-600 via-pink-600 to-indigo-600 bg-clip-text text-transparent dark:from-purple-400 dark:via-pink-300 dark:to-indigo-400"
-                        >Diajukan Klien</span
-                    >
+    <!-- FAQ SECTION (ACCORDION BERSIH) -->
+    <section id="faq" class="py-16 sm:py-20">
+        <div class="mx-auto max-w-3xl px-4 sm:px-6">
+            <div class="text-center">
+                <span class="text-xs font-bold text-[#017E84] uppercase dark:text-[#64D2D7]">Transparansi Informasi</span>
+                <h2 class="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-white">
+                    Pertanyaan Yang Sering Diajukan
                 </h2>
-                <p class="mt-4 text-base font-medium text-slate-600 dark:text-slate-400">
-                    Segala jawaban atas kekhawatiran Anda sebelum memulai kerjasama proyek pembuatan sistem bersama
-                    kami.
+                <p class="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                    Hal-hal penting yang perlu Anda ketahui sebelum memulai kerjasama proyek pembuatan software.
                 </p>
             </div>
 
-            <div class="mt-12 space-y-4">
-                {#each faqs as faq, idx}
-                    <div
-                        class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-colors dark:border-slate-800 dark:bg-slate-900/80"
-                    >
+            <div class="mt-10 divide-y divide-slate-200/80 border-y border-slate-200/80 dark:divide-slate-800 dark:border-slate-800">
+                {#each faqs as item, index}
+                    <div class="py-4">
                         <button
-                            onclick={() => toggleFaq(idx)}
-                            class="flex w-full items-center justify-between gap-4 p-6 text-left font-extrabold text-slate-900 transition-colors hover:text-indigo-600 dark:text-white dark:hover:text-indigo-300"
+                            type="button"
+                            class="flex w-full items-center justify-between text-left text-sm font-semibold text-slate-900 transition-colors hover:text-[#714B67] dark:text-white dark:hover:text-[#E2C3DB]"
+                            onclick={() => toggleFaq(index)}
                         >
-                            <span class="text-base sm:text-lg">{faq.q}</span>
+                            <span>{item.q}</span>
                             <ChevronDown
-                                class={`h-5 w-5 text-indigo-500 transition-transform duration-300 ${activeFaq === idx ? 'rotate-180' : ''}`}
+                                class={`h-4 w-4 flex-shrink-0 text-slate-500 transition-transform duration-200 ${
+                                    openFaqIndex === index ? 'rotate-180 text-[#714B67] dark:text-[#E2C3DB]' : ''
+                                }`}
                             />
                         </button>
-                        {#if activeFaq === idx}
-                            <div
-                                class="border-t border-slate-200 px-6 pt-4 pb-6 text-sm leading-relaxed font-medium text-slate-600 dark:border-slate-800/60 dark:text-slate-300"
-                            >
-                                {faq.a}
+
+                        {#if openFaqIndex === index}
+                            <div class="mt-3 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+                                {item.a}
                             </div>
                         {/if}
                     </div>
@@ -1204,246 +921,120 @@
         </div>
     </section>
 
-    <!-- DIRECT CONTACT TEAM SECTION -->
-    <section
-        id="contact"
-        class="relative z-10 border-t border-slate-200 bg-gradient-to-b from-slate-100 via-white to-slate-100 py-24 dark:border-slate-800 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950"
-    >
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-3xl text-center">
-                <div
-                    class="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/15 px-4 py-1.5 text-xs font-black text-emerald-700 dark:text-emerald-400"
-                >
-                    <PhoneCall class="h-4 w-4" /> Hubungi Tim Langsung
-                </div>
-                <h2 class="mt-4 text-3xl font-black tracking-tight text-slate-900 sm:text-4xl dark:text-white">
-                    Diskusi Proyek Langsung Bersama <span
-                        class="bg-gradient-to-r from-emerald-600 via-teal-500 to-cyan-600 bg-clip-text text-transparent dark:from-emerald-400 dark:to-teal-300"
-                        >Tim Purwotama Satria</span
-                    >
+    <!-- KONTAK / PROFIL DIRECT CTA SECTION -->
+    <section id="kontak" class="border-t border-slate-200/80 bg-white/70 py-16 sm:py-20 dark:border-slate-800 dark:bg-slate-900/50">
+        <div class="mx-auto max-w-4xl px-4 sm:px-6">
+            <div class="text-center">
+                <span class="text-xs font-bold text-[#714B67] uppercase dark:text-[#E2C3DB]">Diskusi Langsung</span>
+                <h2 class="mt-1 text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl dark:text-white">
+                    Mulai Konsultasi Kebutuhan Sistem Anda
                 </h2>
-                <p class="mt-4 text-base font-medium text-slate-600 dark:text-slate-300">
-                    Tidak perlu ragu. Kami siap memberikan penawaran dan konsultasi teknis terbaik secara ramah dan
-                    profesional.
+                <p class="mx-auto mt-2 max-w-xl text-sm text-slate-600 dark:text-slate-400">
+                    Hubungi kami melalui WhatsApp untuk berdiskusi santai mengenai kendala operasional bisnis Anda dan solusi sistem yang tepat.
                 </p>
             </div>
 
-            <!-- Contact Cards -->
-            <div class="mx-auto mt-12 grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-2">
+            <!-- Two Contact Cards (Fairuz & Afif) -->
+            <div class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2">
                 <!-- Fairuz Card -->
-                <div
-                    class="group relative overflow-hidden rounded-3xl border border-emerald-500/40 bg-white p-8 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95"
-                >
-                    <div
-                        class="absolute top-0 right-0 h-32 w-32 rounded-full bg-emerald-500/15 blur-3xl transition-all group-hover:bg-emerald-500/25"
-                    ></div>
+                <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
                     <div class="flex items-center gap-4">
-                        <div
-                            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-600 text-xl font-black text-white shadow-lg"
-                        >
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#017E84] text-base font-bold text-white shadow-xs">
                             F
                         </div>
                         <div>
-                            <h3 class="text-xl font-black text-slate-900 dark:text-white">Fairuz</h3>
-                            <p class="text-xs font-extrabold text-emerald-600 dark:text-emerald-400">
-                                Chief Developer & Tech Lead
-                            </p>
-                            <p class="mt-0.5 text-xs font-bold text-slate-600 dark:text-slate-400">+62 822-4331-7522</p>
+                            <h3 class="text-base font-bold text-slate-900 dark:text-white">Fairuz</h3>
+                            <p class="text-xs font-medium text-[#017E84] dark:text-[#64D2D7]">Lead Software Developer</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">+62 822-4331-7522</p>
                         </div>
                     </div>
-                    <p class="mt-4 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                        Hubungi Fairuz untuk diskusi kebutuhan teknis, arsitektur database, integrasi API, atau estimasi
-                        durasi pengerjaan koding.
+                    <p class="mt-4 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+                        Konsultasi seputar fitur teknis, alur database, demo sistem, spesifikasi server, dan arsitektur aplikasi.
                     </p>
                     <a
                         href={fairuzWa}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-5 py-3.5 text-sm font-black text-slate-950 shadow-lg shadow-emerald-500/35 transition-all hover:from-emerald-400 hover:to-cyan-400"
+                        class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#017E84] py-2.5 text-xs font-semibold text-white shadow-xs transition-all hover:bg-[#01686D]"
                     >
-                        <MessageSquare class="h-4 w-4 fill-slate-950 text-emerald-500" />
-                        <span>Chat WhatsApp (Fairuz)</span>
+                        <MessageSquare class="h-4 w-4" />
+                        <span>Chat WhatsApp (Mas Fairuz)</span>
                     </a>
                 </div>
 
                 <!-- Afif Card -->
-                <div
-                    class="group relative overflow-hidden rounded-3xl border border-indigo-500/40 bg-white p-8 shadow-2xl backdrop-blur-xl dark:bg-slate-900/95"
-                >
-                    <div
-                        class="absolute top-0 right-0 h-32 w-32 rounded-full bg-indigo-500/15 blur-3xl transition-all group-hover:bg-indigo-500/25"
-                    ></div>
+                <div class="rounded-2xl border border-slate-200/80 bg-white p-6 shadow-xs dark:border-slate-800 dark:bg-slate-900">
                     <div class="flex items-center gap-4">
-                        <div
-                            class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-tr from-indigo-600 to-purple-600 text-xl font-black text-white shadow-lg"
-                        >
+                        <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-[#714B67] text-base font-bold text-white shadow-xs">
                             A
                         </div>
                         <div>
-                            <h3 class="text-xl font-black text-slate-900 dark:text-white">Afif</h3>
-                            <p class="text-xs font-extrabold text-indigo-600 dark:text-indigo-400">
-                                Owner & Business Consultant
-                            </p>
-                            <p class="mt-0.5 text-xs font-bold text-slate-600 dark:text-slate-400">+62 821-3439-7280</p>
+                            <h3 class="text-base font-bold text-slate-900 dark:text-white">Afif</h3>
+                            <p class="text-xs font-medium text-[#714B67] dark:text-[#E2C3DB]">Konsultan Kerjasama & Bisnis</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400">+62 821-3439-7280</p>
                         </div>
                     </div>
-                    <p class="mt-4 text-sm leading-relaxed font-medium text-slate-600 dark:text-slate-300">
-                        Hubungi Afif untuk konsultasi skema kerjasama bisnis, negosiasi penawaran proyek, garansi
-                        maintenance, & legalitas.
+                    <p class="mt-4 text-xs leading-relaxed text-slate-600 dark:text-slate-400">
+                        Konsultasi mengenai penawaran proyek, skema anggaran, termin pembayaran, serta legalitas kerjasama.
                     </p>
                     <a
                         href={afifWa}
                         target="_blank"
                         rel="noopener noreferrer"
-                        class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-5 py-3.5 text-sm font-black text-white shadow-lg shadow-purple-500/30 transition-all hover:from-indigo-500 hover:to-pink-500"
+                        class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#714B67] py-2.5 text-xs font-semibold text-white shadow-xs transition-all hover:bg-[#5C3C54]"
                     >
                         <MessageSquare class="h-4 w-4" />
-                        <span>Chat WhatsApp (Afif)</span>
+                        <span>Chat WhatsApp (Mas Afif)</span>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- STICKY FLOATING WHATSAPP BUTTON (CONVERSION BOOSTER) -->
-    <div class="fixed right-6 bottom-6 z-50 flex items-center gap-2">
+    <!-- FLOATING WHATSAPP BUTTON (CONVERSION DI MOBILE) -->
+    <div class="fixed right-5 bottom-5 z-40">
         <a
             href={fairuzWa}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex items-center gap-3 rounded-full bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500 px-5 py-3.5 text-xs font-black text-slate-950 shadow-2xl shadow-emerald-500/50 transition-all hover:scale-105 active:scale-95"
+            class="flex items-center gap-2 rounded-full bg-emerald-600 px-4 py-3 text-xs font-semibold text-white shadow-lg transition-transform hover:scale-105 active:scale-95 sm:px-4 sm:py-2.5"
+            aria-label="Konsultasi WhatsApp"
         >
-            <MessageSquare class="h-5 w-5 fill-slate-950 text-emerald-500 transition-transform group-hover:rotate-12" />
-            <span class="hidden sm:inline">Konsultasi WA Fast-Response</span>
+            <MessageSquare class="h-4 w-4" />
+            <span class="hidden sm:inline">Tanya Kami di WA</span>
         </a>
     </div>
 
     <!-- FOOTER -->
-    <footer
-        class="relative z-10 border-t border-slate-200 bg-white py-12 text-xs text-slate-600 dark:border-slate-800/80 dark:bg-slate-950 dark:text-slate-400"
-    >
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-4">
-                <div class="md:col-span-2">
-                    <div class="flex items-center gap-3">
-                        <div
-                            class="h-9 w-9 flex-shrink-0 rounded-xl border border-indigo-200 bg-white p-1 shadow-md shadow-indigo-500/30 dark:border-indigo-500/30"
-                        >
-                            <img
-                                src="/images/branding/purwotama_logo.png"
-                                alt="Purwotama Satria Logo"
-                                class="h-full w-full object-contain"
-                            />
-                        </div>
-                        <span class="text-lg font-black text-slate-900 dark:text-white">Purwotama Satria</span>
+    <footer class="border-t border-slate-200/80 bg-[#F4F1EB] py-10 text-xs text-slate-600 dark:border-slate-800 dark:bg-[#0A0910] dark:text-slate-400">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6">
+            <div class="flex flex-col items-center justify-between gap-6 sm:flex-row">
+                <div class="flex items-center gap-3">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white p-1 dark:border-slate-800 dark:bg-slate-900">
+                        <img
+                            src="/images/branding/purwotama_logo.png"
+                            alt="Purwotama Logo"
+                            class="h-full w-full object-contain"
+                        />
                     </div>
-                    <p class="mt-3 max-w-md text-xs leading-relaxed font-medium text-slate-600 dark:text-slate-400">
-                        Studio Pengembangan Software, Sistem Informasi Enterprise, LMS, CBT, POS Kasir, SIMRS & Aplikasi
-                        Mobile Kustom Professional dengan mengutamakan performa, keamanan, dan kode yang bersih.
-                    </p>
-                    <div class="mt-4 flex items-center gap-4 text-xs font-bold text-slate-700 dark:text-slate-300">
-                        <span>Fairuz (+62 822-4331-7522)</span>
-                        <span>•</span>
-                        <span>Afif (+62 821-3439-7280)</span>
-                    </div>
+                    <span class="font-bold text-slate-800 dark:text-slate-200">Purwotama Satria</span>
+                    <span class="text-slate-400 dark:text-slate-600">|</span>
+                    <span>Purwokerto, Jawa Tengah</span>
                 </div>
 
-                <div>
-                    <h4 class="mb-3 text-sm font-bold text-slate-900 dark:text-white">Sistem Unggulan</h4>
-                    <ul class="space-y-2 font-medium">
-                        <li>
-                            <a href="#portfolio" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >LMS Platform</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#portfolio" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >Eptunu CBT Engine</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#portfolio" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >SIMRS Rumah Sakit</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#portfolio" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >Pendataan Ternak ERP</a
-                            >
-                        </li>
-                        <li><a href="#portfolio" class="transition-colors hover:text-white">Sistem Kasir POS</a></li>
-                    </ul>
-                </div>
-
-                <div>
-                    <h4 class="mb-3 text-sm font-bold text-slate-900 dark:text-white">Tautan Cepat</h4>
-                    <ul class="space-y-2 font-medium">
-                        <li>
-                            <a href="#services" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >Layanan</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#portfolio" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >Portofolio (11 Proyek)</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#estimator" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >Estimator Proyek</a
-                            >
-                        </li>
-                        <li>
-                            <a href="#faq" class="transition-colors hover:text-indigo-600 dark:hover:text-white">FAQ</a>
-                        </li>
-                        <li>
-                            <Link href="/login" class="transition-colors hover:text-indigo-600 dark:hover:text-white"
-                                >Admin Portal</Link
-                            >
-                        </li>
-                    </ul>
+                <div class="flex flex-wrap items-center gap-5 font-medium text-slate-600 dark:text-slate-400">
+                    <a href="#modul" class="hover:text-[#714B67] dark:hover:text-white">Apps</a>
+                    <a href="#keunggulan" class="hover:text-[#714B67] dark:hover:text-white">Keunggulan</a>
+                    <a href="#faq" class="hover:text-[#714B67] dark:hover:text-white">FAQ</a>
+                    <a href="#kontak" class="hover:text-[#714B67] dark:hover:text-white">Kontak</a>
+                    <Link href="/login" class="hover:text-[#714B67] dark:hover:text-white">Login Admin</Link>
                 </div>
             </div>
 
-            <div
-                class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-6 font-medium sm:flex-row dark:border-slate-800/80"
-            >
-                <p>&copy; 2010 - {new Date().getFullYear()} Purwotama Satria. All rights reserved.</p>
-                <p class="text-slate-500 dark:text-slate-400">Developed with Laravel 13 + Svelte 5</p>
+            <div class="mt-8 border-t border-slate-300/60 pt-6 text-center text-[11px] sm:text-left sm:flex sm:justify-between dark:border-slate-800/80">
+                <p>&copy; 2010 - {new Date().getFullYear()} Purwotama Satria. Seluruh hak cipta dilindungi undang-undang.</p>
+                <p class="mt-2 sm:mt-0 text-slate-500">Solusi Perangkat Lunak & Sistem Informasi Terpadu</p>
             </div>
         </div>
     </footer>
 </div>
-
-<!-- STYLES FOR HIGH-VIBRANCY MESH ANIMATIONS -->
-<style>
-    @keyframes floatOrb {
-        0%,
-        100% {
-            transform: translateY(0px) rotate(0deg) scale(1);
-        }
-        50% {
-            transform: translateY(-25px) rotate(5deg) scale(1.08);
-        }
-    }
-    @keyframes pulseGlow {
-        0%,
-        100% {
-            opacity: 0.5;
-            transform: scale(1);
-        }
-        50% {
-            opacity: 0.9;
-            transform: scale(1.12);
-        }
-    }
-    .animate-float-slow {
-        animation: floatOrb 8s ease-in-out infinite;
-    }
-    .animate-float-delayed {
-        animation: floatOrb 11s ease-in-out 3s infinite;
-    }
-    .animate-pulse-glow {
-        animation: pulseGlow 6s ease-in-out infinite;
-    }
-</style>

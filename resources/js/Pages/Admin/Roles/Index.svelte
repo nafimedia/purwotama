@@ -84,15 +84,15 @@
     }
 </script>
 
-<AppLayout title="Manajemen Role & Permission (RBAC)">
+<AppLayout title="Manajemen Peran & Hak Akses">
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-            <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">Manajemen Peran & Izin (RBAC)</h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Konfigurasi hak akses pengguna dengan Spatie Laravel Permission</p>
+            <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100">Manajemen Peran & Hak Akses</h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Atur batasan hak akses dan wewenang pengguna dalam sistem</p>
         </div>
         <Button variant="primary" size="md" onclick={openCreateModal}>
             <Plus class="w-4 h-4" />
-            <span>Tambah Role Baru</span>
+            <span>Tambah Peran Baru</span>
         </Button>
     </div>
 

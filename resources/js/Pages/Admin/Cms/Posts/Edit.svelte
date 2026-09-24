@@ -7,7 +7,7 @@
     import RichTextEditor from '@/Components/UI/RichTextEditor.svelte';
     import FileUpload from '@/Components/UI/FileUpload.svelte';
     import RevisionsModal from '@/Components/CMS/RevisionsModal.svelte';
-    import { Save, ArrowLeft, Globe, Lock, Shield, Newspaper, Sparkles, Clock, Pin, Star, History, Copy, CheckCircle2, AlertCircle } from 'lucide-svelte';
+    import { Save, ArrowLeft, Globe, Lock, Shield, Newspaper, Clock, Pin, Star, History, Copy, CheckCircle2, AlertCircle } from 'lucide-svelte';
 
     interface Props {
         postItem?: any;

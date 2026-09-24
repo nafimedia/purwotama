@@ -16,8 +16,7 @@
         MessageSquare,
         CheckCircle2,
         XCircle,
-        Search,
-        Sparkles
+        Search
     } from 'lucide-svelte';
     import type { FormItem } from '@/lib/types';
 
@@ -68,16 +67,16 @@
     }
 </script>
 
-<AppLayout title="Dynamic Form Builder Studio">
+<AppLayout title="Pembuat Formulir">
     <!-- Header Banner -->
     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
             <h1 class="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
                 <FileSpreadsheet class="w-5 h-5 text-indigo-500" />
-                <span>Form Builder Studio</span>
+                <span>Pembuat Formulir Online</span>
             </h1>
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
-                Kelola dan buat formulir interaktif ala Google Forms untuk kontak, survei, dan pendaftaran
+                Kelola dan buat formulir online untuk kontak, survei, dan pendaftaran pengunjung
             </p>
         </div>
 

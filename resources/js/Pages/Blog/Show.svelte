@@ -1,6 +1,6 @@
 <script lang="ts">
     import { useForm, Link } from '@inertiajs/svelte';
-    import { Calendar, Clock, Eye, User, Share2, MessageSquare, Send, ArrowLeft, Bookmark, Sparkles, List } from 'lucide-svelte';
+    import { Calendar, Clock, Eye, User, Share2, MessageSquare, Send, ArrowLeft, Bookmark, Layers, TrendingUp, List } from 'lucide-svelte';
     import ThemeToggle from '@/Components/UI/ThemeToggle.svelte';
 
     interface Props {
@@ -216,7 +216,7 @@
                 {#if relatedPosts.length > 0}
                     <div class="pt-8 border-t border-slate-800 space-y-4">
                         <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                            <Sparkles class="w-5 h-5 text-indigo-400" />
+                            <Layers class="w-5 h-5 text-indigo-400" />
                             <span>Artikel Terkait</span>
                         </h3>
 
@@ -297,7 +297,7 @@
                 <!-- Popular Articles Widget -->
                 <div class="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-4">
                     <h3 class="text-sm font-bold text-white flex items-center gap-2">
-                        <Sparkles class="w-4 h-4 text-amber-400" />
+                        <TrendingUp class="w-4 h-4 text-amber-400" />
                         <span>Artikel Terpopuler</span>
                     </h3>
                     <div class="space-y-3">

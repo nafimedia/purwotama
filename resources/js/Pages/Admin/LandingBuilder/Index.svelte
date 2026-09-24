@@ -6,7 +6,7 @@
     import Modal from '@/Components/UI/Modal.svelte';
     import DynamicSectionRenderer from '@/Components/Landing/DynamicSectionRenderer.svelte';
     import {
-        Sparkles,
+        LayoutTemplate,
         Plus,
         Eye,
         EyeOff,
@@ -149,23 +149,23 @@
     }
 </script>
 
-<AppLayout title="Visual Landing Builder Studio">
+<AppLayout title="Editor Halaman Utama">
     <!-- Top Toolbar Header -->
     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 mb-6 shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
         <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 via-purple-500 to-pink-500 p-0.5 shadow-md">
                 <div class="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
-                    <Sparkles class="w-5 h-5 text-indigo-400" />
+                    <LayoutTemplate class="w-5 h-5 text-indigo-400" />
                 </div>
             </div>
             <div>
                 <h1 class="text-lg font-extrabold text-white flex items-center gap-2">
-                    FairuzKit Visual Studio
+                    Editor Tata Letak Halaman
                     <span class="px-2 py-0.5 text-[10px] font-bold rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
-                        Page Builder v1.0
+                        Halaman Depan
                     </span>
                 </h1>
-                <p class="text-xs text-slate-400">Edit, urutkan, dan kustomisasi landing page secara visual real-time</p>
+                <p class="text-xs text-slate-400">Atur tata letak, urutan bagian, dan tampilan halaman utama secara langsung</p>
             </div>
         </div>
 
